@@ -1,0 +1,140 @@
+const musicData = [
+    { artist: 'Adele', name: '25', sales: 1731000 },
+    { artist: 'Drake', name: 'Views', sales: 1608000 },
+    { artist: 'Beyonce', name: 'Lemonade', sales: 1554000 },
+    { artist: 'Chris Stapleton', name: 'Traveller', sales: 1085000 },
+    { artist: 'Pentatonix', name: 'A Pentatonix Christmas', sales: 904000 },
+    { artist: 'Original Broadway Cast Recording', name: 'Hamilton: An American Musical', sales: 820000 },
+    { artist: 'Twenty One Pilots', name: 'Blurryface', sales: 738000 },
+    { artist: 'Prince', name: 'The Very Best of Prince', sales: 668000 },
+    { artist: 'Rihanna', name: 'Anti', sales: 603000 },
+    { artist: 'Justin Bieber', name: 'Purpose', sales: 554000 }
+];
+
+let totalAlbumSales = musicData.reduce( (accumulator, currentValue) => {
+  return accumulator + currentValue.sales;
+}, 0);
+
+
+const musicData = [
+    { artist: 'Adele', name: '25', sales: 1731000 },
+    { artist: 'Drake', name: 'Views', sales: 1608000 },
+    { artist: 'Beyonce', name: 'Lemonade', sales: 1554000 },
+    { artist: 'Chris Stapleton', name: 'Traveller', sales: 1085000 },
+    { artist: 'Pentatonix', name: 'A Pentatonix Christmas', sales: 904000 },
+    { artist: 'Original Broadway Cast Recording', name: 'Hamilton: An American Musical', sales: 820000 },
+    { artist: 'Twenty One Pilots', name: 'Blurryface', sales: 738000 },
+    { artist: 'Prince', name: 'The Very Best of Prince', sales: 668000 },
+    { artist: 'Rihanna', name: 'Anti', sales: 603000 },
+    { artist: 'Justin Bieber', name: 'Purpose', sales: 554000 }
+];
+
+let totalAlbumSales = musicData.filter(entry => entry.artist.concat(entry.name).length < 25).reduce( (accumulator, currentValue) => {
+  return accumulator + currentValue.sales;
+}, 0);
+
+ const data = [
+     { name: 'Tyler', favoriteIceCreams: ['Strawberry', 'Vanilla', 'Chocolate', 'Cookies & Cream'] },
+     { name: 'Richard', favoriteIceCreams: ['Cookies & Cream', 'Mint Chocolate Chip', 'Chocolate', 'Vanilla'] },
+     { name: 'Amanda', favoriteIceCreams: ['Chocolate', 'Rocky Road', 'Pistachio', 'Banana'] },
+     { name: 'Andrew', favoriteIceCreams: ['Vanilla', 'Chocolate', 'Mint Chocolate Chip'] },
+     { name: 'David', favoriteIceCreams: ['Vanilla', 'French Vanilla', 'Vanilla Bean', 'Strawberry'] },
+     { name: 'Karl', favoriteIceCreams: ['Strawberry', 'Chocolate', 'Mint Chocolate Chip'] }
+ ];
+
+let iceCreamTotals = data.reduce( (map, entry) => {
+     for (let cream of entry.favoriteIceCreams) {
+         isNaN(map[cream]) ? map[cream] = 1 : map[cream]++
+     }
+     return map;
+}, {});
+
+
+
+
+const LOAD_PROFILE = 'LOAD_PROFILE';
+
+const myAction = {
+  type: LOAD_PROFILE
+};
+
+
+const mealCreator = mealId => ({
+type: 'CREATE_MEAL',
+id: mealId
+});
+
+
+function reducer (state, action) {
+  switch (action.type) {
+    case 'SUBMIT_USER' :
+      return Object.assign({}, state, {
+        user: action.user
+      })
+  }
+}
+function myReducer (state = initialState, action) {
+  if (action.type === CHANGE_NAME) {
+    return {
+      ...state,
+      name: 'Tyler'
+    };
+  }
+  return state;
+}
+function appReducer(state = [{ flavor: 'Chocolate', count: 36 }, { flavor: 'Vanilla', count: 210 }], action) {
+    
+  switch(action.type){
+        
+    case "DELETE_FLAVOR":
+            
+      return state.filter(entry => entry.flavor !== action.flavor);
+        
+    default:
+            
+      return state;
+    
+  }
+
+}
+
+
+
+
+## array manipulating with splitt function !
+
+const initialCalendarState = { sunday: { breakfast: null, lunch: null, dinner: null },
+  monday: { breakfast: null, lunch: null, dinner: null },
+  tuesday: { breakfast: null, lunch: null, dinner: null },
+  wednesday: { breakfast: null, lunch: null, dinner: null },
+  thursday: { breakfast: null, lunch: null, dinner: null },
+  friday: { breakfast: null, lunch: null, dinner: null },
+  saturday: { breakfast: null, lunch: null, dinner: null } }
+
+# overwrite a value: 
+{...initialCalendarState,['saturday']: {test: null}}
+=> { sunday: { breakfast: null, lunch: null, dinner: null },
+  monday: { breakfast: null, lunch: null, dinner: null },
+  tuesday: { breakfast: null, lunch: null, dinner: null },
+  wednesday: { breakfast: null, lunch: null, dinner: null },
+  thursday: { breakfast: null, lunch: null, dinner: null },
+  friday: { breakfast: null, lunch: null, dinner: null },
+  saturday: { test: null } }
+
+# add value
+{...initialCalendarState,['saturday']: {...initialCalendarState['saturday'],test: null}}
+=> { sunday: { breakfast: null, lunch: null, dinner: null },
+  monday: { breakfast: null, lunch: null, dinner: null },
+  tuesday: { breakfast: null, lunch: null, dinner: null },
+  wednesday: { breakfast: null, lunch: null, dinner: null },
+  thursday: { breakfast: null, lunch: null, dinner: null },
+  friday: { breakfast: null, lunch: null, dinner: null },
+  saturday: { breakfast: null, lunch: null, dinner: null, test: null } }
+
+
+
+connect(mapStateToProps, mapDispatchToProps)(MyComponent)
+
+mapStateToProps(state, [ownProps])
+
+To accesss the backend server in your code, we have stored the URL to the API server in the environment variable `REACT_APP_BACKEND` which you can access in your code using `process.env.REACT_APP_BACKEND`. You can see this in action in `frontend/src/App.js` in `componentDidMount`.

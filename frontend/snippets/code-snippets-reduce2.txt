@@ -1,0 +1,91 @@
+const dayOrder = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
+
+const calendar = {
+  sunday: {
+    breakfast: 'pizza',
+    lunch: null,
+    dinner: null,
+  },
+  monday: {
+    breakfast: null,
+    lunch: null,
+    dinner: null,
+  },
+  tuesday: {
+    breakfast: null,
+    lunch: 'pizza2',
+    dinner: null,
+  },
+  wednesday: {
+    breakfast: null,
+    lunch: null,
+    dinner: null,
+  },
+  thursday: {
+    breakfast: null,
+    lunch: null,
+    dinner: null,
+  },
+  friday: {
+    breakfast: null,
+    lunch: null,
+    dinner: 'pizza3',
+  },
+  saturday: {
+    breakfast: 'pizza4',
+    lunch: 'pizza5',
+    dinner: 'pizza6',
+  },
+}
+
+
+
+let mappedOutput = dayOrder.map((dayValue) => ({
+      dayAttribute: dayValue
+}))
+console.log(mappedOutput)
+
+
+mappedOutput = dayOrder.map((dayValue) => ({
+      day: dayValue,
+      meals: Object.keys(calendar[dayValue]).reduce((meals, meal) => {
+        meals[meal] = calendar[dayValue][meal]
+          ? calendar[dayValue][meal]
+          : null
+
+        return meals
+      }, {})
+}))
+console.log(mappedOutput)
+
+
+mappedOutput = dayOrder.map((dayValue) => ({
+      day: dayValue,
+      meals: Object.keys(calendar[dayValue]).reduce((mealsValue, mealValue) => {
+        calendar[dayValue][mealValue] && (mealsValue[mealValue] = calendar[dayValue][mealValue])
+        return mealsValue
+      }, {})
+}))
+console.log(mappedOutput)
+
+
+
+function Person(first, last, age, eyecolor) {
+    this.firstName = first
+    this.lastName = last
+    this.age = age
+    this.eyeColor = eyecolor
+} 
+
+Person.text = "text"
+Person.prototype.xyz = "text2"
+Person.prototype.name = function() {
+    return this.firstName + " " + this.lastName;
+}; 
+
+var myFather = new Person("John", "Doe", 50, "blue")
+myFather.test = "test"
+console.log(myFather)
+console.log(myFather.text)
+console.log(myFather.xyz)
+console.log(myFather.name())

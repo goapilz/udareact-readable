@@ -1,0 +1,23 @@
+commit+push non git project to a new created repository on github
+=================================================================
+git init
+git add .
+git commit -m "First commit"
+
+git remote rm origin
+git remote add origin https://github.com/goapilz/udareact-meals-course.git
+git remote -v
+
+git push origin master
+
+
+git stuff to apply a commit to a non git project
+================================================
+# create the template project with create-react-app
+node_modules/.bin/create-react-app udareact-meals
+git init
+(git add .)
+(git commit -m 'message')
+git remote add origin https://github.com/udacity/reactnd-udacimeals-complete.git
+git fetch
+git reset --hard 6c458c57016e56c8e5f29c20a84dd705ea632cc8
