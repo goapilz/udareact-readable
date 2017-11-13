@@ -14,8 +14,25 @@ class App extends Component {
         comments: []
     }*/
 
+    componentDidMount() {
+        ReadableAPI.getAllCategories().then((data) => {
+            console.log(data)
+            const {reload} = this.props
+            reload({categories:data, posts: [], comments: []})
+        })
+        ReadableAPI.getAllPosts().then((data) => {
+            console.log(data)
+            const {reload} = this.props
+            reload({categories:[], posts:data, comments: []})
+        })
+        /*        ReadableAPI.getAllComments('8xf0y6ziyjabvozdd253nd').then((data) => {
+                    reloadComments({comments:data})
+                })*/
+    }
+
+
     render() {
-        const {reload} = this.props
+        const {reloadAll} = this.props
         const {categories, posts,comments} = this.props // not state ?
         
         // {JSON.stringify(this.state.backend)}
@@ -28,7 +45,7 @@ class App extends Component {
                 ))}
                 <div>posts: {JSON.stringify(posts)}</div>
                 <div>comments(8xf0y6ziyjabvozdd253nd): {JSON.stringify(comments)}</div>
-                <button onClick={() => reload({categories: [{name: 'redux', path: 'reduxPath'}], posts: [], comments: []})}
+                <button onClick={() => reloadAll()}
                         className='icon-btn'>
                     <FaRefresh size={30}/>
                 </button>
@@ -47,7 +64,9 @@ function mapStateToProps({categories, posts, comments}) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        reload: (data) => dispatch(reload(data)),
+        reloadAll: () => dispatch(reload({categories: [{name: 'redux', path: 'reduxPath'},{name: 'react', path: 'reactPath'}], posts: [], comments: []})),
+        reloadAllAsync: () => dispatch(reload({categories: [{name: 'redux', path: 'reduxPath'},{name: 'react', path: 'reactPath'}], posts: [], comments: []})),
+        reload: (data) => dispatch(reload(data))
     }
 }
 
