@@ -21,3 +21,10 @@ git init
 git remote add origin https://github.com/udacity/reactnd-udacimeals-complete.git
 git fetch
 git reset --hard 6c458c57016e56c8e5f29c20a84dd705ea632cc8
+
+
+undo commit
+===========
+# For example, commit 7f6d03 was before the 2 wrongful commits.
+git reset 7f6d03 --hard
+git push origin -f

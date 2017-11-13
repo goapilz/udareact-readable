@@ -2,36 +2,53 @@ import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import * as ReadableAPI from './../util/ReadableAPI'
 import './../css/App.css'
+import {reload} from '../actions'
+import {connect} from 'react-redux';
+import FaRefresh from 'react-icons/lib/fa/refresh'
 
 class App extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            categories: []
-        }
-    }
 
-    componentDidMount() {
-        ReadableAPI.getAllCategories().then((data) => {
-            console.log('data', data)
-            this.setState({categories:data});
-        })
-    }
+    /*state = {
+        categories: [],
+        posts: [],
+        comments: []
+    }*/
 
     render() {
-        const {categories} = this.state
-        console.log('categories', categories)
+        const {reload} = this.props
+        const {categories, posts,comments} = this.props // not state ?
+        
         // {JSON.stringify(this.state.backend)}
         return (
             <div className="category-overview">
                 {categories.map((category) => (
                     <div className="category" key={category.name}>
-                        <Link to={`/category/${category.name}`} className='open-category'>{category.name}</Link>
+                        <Link to={`/category/${category.path}`} className='open-category'>{category.name}</Link>
                     </div>
                 ))}
+                <div>posts: {JSON.stringify(posts)}</div>
+                <div>comments(8xf0y6ziyjabvozdd253nd): {JSON.stringify(comments)}</div>
+                <button onClick={() => reload({categories: [{name: 'redux', path: 'reduxPath'}], posts: [], comments: []})}
+                        className='icon-btn'>
+                    <FaRefresh size={30}/>
+                </button>
             </div>
         )
     }
 }
 
-export default App
+function mapStateToProps({categories, posts, comments}) {
+    return {
+        categories,
+        posts,
+        comments
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        reload: (data) => dispatch(reload(data)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
