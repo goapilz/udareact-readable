@@ -10,7 +10,7 @@ const headers = {
     'Authorization': token
 }
 
-export const getAllCategories = () =>
+export const getCategories = () =>
     // {credentials: 'include'} ??
     fetch(`${APP_BACKEND}/categories`, {headers})
         .then((res) => {
@@ -20,7 +20,7 @@ export const getAllCategories = () =>
             return data.categories
         })
 
-export const getAllPosts = () =>
+export const getPosts = () =>
     fetch(`${APP_BACKEND}/posts`, {headers})
         .then((res) => {
             return res.json()
@@ -29,7 +29,7 @@ export const getAllPosts = () =>
             return data
         })
 
-export const getAllPostsForCategory = (categoryId) =>
+export const getPostsForCategory = (categoryId) =>
     fetch(`${APP_BACKEND}/${categoryId}/posts`, {headers})
         .then((res) => {
             return res.json()
@@ -38,7 +38,7 @@ export const getAllPostsForCategory = (categoryId) =>
             return data
         })
 
-export const getAllComments = (postId) =>
+export const getCommentsForPost = (postId) =>
     fetch(`${APP_BACKEND}/posts/${postId}/comments`, {headers})
         .then((res) => {
             return res.json()

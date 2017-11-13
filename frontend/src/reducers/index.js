@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { RELOAD } from '../actions'
+import { SET_CATEGORIES, SET_POSTS, SET_COMMENTS_OF_POST } from '../actions'
 
 const initialCategoriesState = []
 const initialPostsState = []
@@ -7,7 +7,7 @@ const initialCommentsState = []
 
 function categories (state = initialCategoriesState, action) {
     switch (action.type) {
-        case RELOAD :
+        case SET_CATEGORIES :
             const { categories } = action
             return categories
         default :
@@ -17,7 +17,7 @@ function categories (state = initialCategoriesState, action) {
 
 function posts (state = initialPostsState, action) {
     switch (action.type) {
-        case RELOAD :
+        case SET_POSTS :
             const { posts } = action
             return posts
         default :
@@ -25,14 +25,14 @@ function posts (state = initialPostsState, action) {
     }
 }
 
-function comments (state = initialCommentsState, action) {
+function commentsOfPost (state = initialCommentsState, action) {
     switch (action.type) {
-        case RELOAD :
-            const { comments } = action
-            return comments
+        case SET_COMMENTS_OF_POST :
+            const { commentsOfPost } = action
+            return commentsOfPost
         default :
             return state
     }
 }
 
-export default combineReducers({categories, posts, comments})
+export default combineReducers({categories, posts, commentsOfPost})

@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
-import * as ReadableAPI from './../util/ReadableAPI'
 import './../css/App.css'
-import {reload, fetchCategories} from '../actions'
+import {reloadCategories, reloadPosts, reloadCommentsForPost} from '../actions'
 import {connect} from 'react-redux';
 import FaRefresh from 'react-icons/lib/fa/refresh'
 
@@ -15,27 +14,17 @@ class App extends Component {
     }*/
 
     componentDidMount() {
-        ReadableAPI.getAllCategories().then((data) => {
-            console.log(data)
-            const {reload} = this.props
-            reload({categories:data, posts: [], comments: []})
-        })
-        ReadableAPI.getAllPosts().then((data) => {
-            console.log(data)
-            const {reload} = this.props
-            reload({categories:[], posts:data, comments: []})
-        })
-        /*        ReadableAPI.getAllComments('8xf0y6ziyjabvozdd253nd').then((data) => {
-                    reloadComments({comments:data})
-                })*/
+        const {reloadCategories, reloadPosts, reloadCommentsForPost} = this.props
+        reloadCategories()
+        reloadPosts()
+        reloadCommentsForPost('8xf0y6ziyjabvozdd253nd')
     }
 
 
     render() {
-        const {fetchCategories} = this.props
-        const {categories, posts,comments} = this.props // not state ?
-        
-        // {JSON.stringify(this.state.backend)}
+        const {reloadCategories, reloadPosts, reloadCommentsForPost} = this.props
+        const {categories, posts, commentsForPost} = this.props // not state ?
+
         return (
             <div className="category-overview">
                 {categories.map((category) => (
@@ -44,9 +33,12 @@ class App extends Component {
                     </div>
                 ))}
                 <div>posts: {JSON.stringify(posts)}</div>
-                <div>comments(8xf0y6ziyjabvozdd253nd): {JSON.stringify(comments)}</div>
-                <button onClick={() => fetchCategories()}
-                        className='icon-btn'>
+                <div>comments(8xf0y6ziyjabvozdd253nd): {JSON.stringify(commentsForPost)}</div>
+                <button onClick={() => {
+                    reloadCategories()
+                    reloadPosts()
+                    reloadCommentsForPost('8xf0y6ziyjabvozdd253nd')
+                }} className='icon-btn'>
                     <FaRefresh size={30}/>
                 </button>
             </div>
@@ -54,20 +46,19 @@ class App extends Component {
     }
 }
 
-function mapStateToProps({categories, posts, comments}) {
+function mapStateToProps({categories, posts, commentsForPost}) {
     return {
         categories,
         posts,
-        comments
+        commentsForPost
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        reloadAll: () => dispatch(reload({categories: [{name: 'redux', path: 'reduxPath'},{name: 'react', path: 'reactPath'}], posts: [], comments: []})),
-        reloadAllAsync: () => dispatch(reload({categories: [{name: 'redux', path: 'reduxPath'},{name: 'react', path: 'reactPath'}], posts: [], comments: []})),
-        reload: (data) => dispatch(reload(data)),
-        fetchCategories: () => dispatch(fetchCategories())
+        reloadCategories: () => dispatch(reloadCategories()),
+        reloadPosts: () => dispatch(reloadPosts()),
+        reloadCommentsForPost: (postId) => dispatch(reloadCommentsForPost(postId))
     }
 }
 
