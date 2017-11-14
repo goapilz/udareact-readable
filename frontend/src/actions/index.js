@@ -25,8 +25,7 @@ export function setComments({ commentsOfPost }) {
         commentsOfPost
     }
 }
-
-
+ 
 export const reloadCategories = () => dispatch => (
     ReadableAPI.getCategories().then((data) => {
         dispatch(setCategories({categories:data}))

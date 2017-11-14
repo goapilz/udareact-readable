@@ -18,7 +18,7 @@
   font-size: large;
 }
 
-.category-header {
+.categories {
   display: flex;
   justify-content: space-around;
   margin: 0;
