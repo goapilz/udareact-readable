@@ -28,7 +28,7 @@ class App extends Component {
         return (
             <div className="category-overview">
                 {categories.map((category) => (
-                    <div className="category" key={category.name}>
+                    <div className="category-header" key={category.name}>
                         <Link to={`/category/${category.path}`} className='open-category'>{category.name}</Link>
                     </div>
                 ))}

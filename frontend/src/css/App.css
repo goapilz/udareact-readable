@@ -18,6 +18,29 @@
   font-size: large;
 }
 
+.category-header {
+  display: flex;
+  justify-content: space-around;
+  margin: 0;
+  margin-left: 152px;
+}
+
+.category {
+  font-size: 30px;
+  font-weight: 300;
+}
+
+ul {
+  padding-left: 0;
+}
+
+li {
+  list-style-type: none;
+}
+
+
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
