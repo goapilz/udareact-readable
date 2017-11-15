@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { SET_CATEGORIES, SET_POSTS, SET_COMMENTS_OF_POST } from '../actions'
+import { SET_CATEGORIES, SET_POSTS, UPDATE_POST, SET_COMMENTS_OF_POST } from '../actions'
 
 const initialCategoriesState = []
 const initialPostsState = []
@@ -20,6 +20,20 @@ function posts (state = initialPostsState, action) {
         case SET_POSTS :
             const { posts } = action
             return posts
+        case UPDATE_POST :
+
+            const { post } = action
+
+            console.log('post: ' + post)
+            const newState = []
+            newState.push(...state)
+            const index = newState.findIndex(x => x.id === post.id);
+            if (index && index >= 0) {
+                newState[index] = post;
+            } else {
+                newState.push(post)
+            }
+            return newState
         default :
             return state
     }

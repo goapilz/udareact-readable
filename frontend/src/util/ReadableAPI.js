@@ -29,6 +29,15 @@ export const getPosts = () =>
             return data
         })
 
+export const getPost = (postId) =>
+    fetch(`${APP_BACKEND}/posts/${postId}`, {headers})
+        .then((res) => {
+            return res.json()
+        })
+        .then((data) => {
+            return data
+        })
+
 export const getPostsForCategory = (categoryId) =>
     fetch(`${APP_BACKEND}/${categoryId}/posts`, {headers})
         .then((res) => {
