@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
-import {Link, Route} from 'react-router-dom'
 import './../css/App.css'
 import {reloadCategories, reloadPosts} from '../actions'
-import {connect} from 'react-redux';
 import FaRefresh from 'react-icons/lib/fa/refresh'
 import CategoryView from './CategoryView'
-
+import RootView from './RootView'
+import {Link, Route, withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 class App extends Component {
 
     state = {
@@ -21,8 +21,7 @@ class App extends Component {
 
     getCategory (categories, categoryId) {
         return categories.find(x => x.path ===categoryId)
-     }  
-
+     }
     render() {
         const {reloadCategories, reloadPosts} = this.props
         const {categories, posts} = this.props // not state ?
@@ -34,30 +33,13 @@ class App extends Component {
 
         return (
             <div>
-                <button onClick={() => {
-                    reloadCategories()
-                    reloadPosts()
-                }} className='icon-btn'>
-                    <FaRefresh size={30}/>
-                </button>
-                <Route exact path='/' render={()=> (
-                    <div>
-                    {categories.map((category) => (
-                        <CategoryView key={category.path} category={category} postsPerCategory={posts.find(postWithCategory => postWithCategory.category === category.path).posts} sortingType={'voteScore'}/>
-                    ))}
-                    </div>
-                )}/> 
-                <Route path='/category/:categoryId' render={(match) => (
-                    this.getCategory(categories, match.params.categoryId) ? 
-                   <CategoryView category={this.getCategory(categories, match.params.categoryId)} 
-                        postsPerCategory={posts.find(postWithCategory => postWithCategory.category === 'redux')} sortingType={'voteScore'}/>
-                        :
-                        <div></div>
-                )}/>
+                <Route exact path='/' component={RootView}/>
+                <Route path='/category/:categoryId' component={CategoryView}/>
             </div>
         )
     }
-}   
+}
+
 
 function mapStateToProps({categories, posts}) {
     return {
@@ -77,4 +59,4 @@ function mapDispatchToProps(dispatch) {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
