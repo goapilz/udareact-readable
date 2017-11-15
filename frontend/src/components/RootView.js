@@ -1,16 +1,46 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {reloadCategories, reloadPosts} from '../actions'
+import CategoryComp from './CategoryComp'
 
 
 class RootView extends React.Component {
 
+    componentDidMount() {
+        const {reloadCategories, reloadPosts} = this.props
+        reloadCategories()
+        reloadPosts()
+    }
+
     render () {
+        const {categories, posts} = this.props
         return (
-            <div><div>Root</div><Link to={`/category/react`}>React</Link> <Link to={`/category/redux`}>Redux</Link> <Link to={`/category/test`}>Test</Link></div>
+            <div>
+                {categories.map((category) => (
+                    <CategoryComp key={category.path} category={category}
+                                  posts={posts.find(postWithCategory => postWithCategory.category === category.path).posts}
+                                  sortingType={'voteScore'}/>
+                ))}
+            </div>
         )
     }
 }
 
-export default RootView
+function mapStateToProps({categories, posts}) {
+    return {
+        categories,
+        posts: categories.map((categoryValue) => ({
+            category: categoryValue.name,
+            posts: posts.filter(post => post.category === categoryValue.name)
+        }))
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        reloadCategories: () => dispatch(reloadCategories()),
+        reloadPosts: () => dispatch(reloadPosts())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RootView)

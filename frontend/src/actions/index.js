@@ -39,9 +39,8 @@ export const reloadPosts = () => dispatch => (
 )
 
 export const reloadPostsForCategory = (categoryId) => dispatch => (
-    ReadableAPI.getPostsForCategory(categoryId).then((data) => {
-        // TODO check if needed - always read all posts ? or separate load for category page
-        // dispatch(reload({categories:data, posts: [], comments: []}))
+    ReadableAPI.getPostsForCategory(categoryId).then((data) =>{
+        dispatch(setPosts({posts:data}))
     })
 )
 

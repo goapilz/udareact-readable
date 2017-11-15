@@ -6,9 +6,32 @@ postRating
 
 sort
 
+
+function mapDispatchToProps(dispatch) {
+    return {
+        reloadCategories: () => dispatch(reloadCategories()),
+        reloadPosts: () => dispatch(reloadPosts()),
+        // reloadCommentsForPost: (postId) => dispatch(reloadCommentsForPost(postId))
+    }
+}
+
+
+        const {reloadCategories, reloadPosts} = this.props
+        const {categories, posts} = this.props // not state ?
+
+
+        // {JSON.stringify(commentsForPost)}
+        // <div>posts: {JSON.stringify(posts)}</div>
+
+
+
 {posts.filter(postWithCategory => postWithCategory.category === category.name)[0].posts.map((postValue) => (
     <div key={postValue.id}>{postValue.title}</div>
 ))}
+
+    getCategory (categories, categoryId) {
+        return categories.find(x => x.path ===categoryId)
+     }
 
 
  let category = categories.length > 0 && categories.find(categoryValue => categoryValue.path === categoryId)
