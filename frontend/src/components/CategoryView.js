@@ -7,14 +7,17 @@ import CategoryComp from './CategoryComp'
 class CategoryView extends React.Component {
 
     componentDidMount() {
-        const {reloadCategories, reloadPostsForCategory, categories} = this.props
+        const {reloadCategories, reloadPostsForCategory, categories,posts} = this.props
         const {categoryId} = this.props.match.params
 
         if (categories.length === 0) {
             // reload only if needed
             reloadCategories()
         }
-        reloadPostsForCategory(categoryId)
+        if (posts.length === 0) {
+            // reload only if needed
+            reloadPostsForCategory(categoryId)
+        }
     }
 
     render() {
