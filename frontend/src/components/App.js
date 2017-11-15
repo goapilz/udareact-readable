@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link, Route} from 'react-router-dom'
 import './../css/App.css'
 import {reloadCategories, reloadPosts} from '../actions'
 import {connect} from 'react-redux';
 import FaRefresh from 'react-icons/lib/fa/refresh'
+import CategoryView from './CategoryView'
 
 class App extends Component {
 
@@ -18,6 +19,9 @@ class App extends Component {
         // reloadCommentsForPost('8xf0y6ziyjabvozdd253nd')
     }
 
+    getCategory (categories, categoryId) {
+        return categories.find(x => x.path ===categoryId)
+     }  
 
     render() {
         const {reloadCategories, reloadPosts} = this.props
@@ -25,6 +29,8 @@ class App extends Component {
 
         // {JSON.stringify(commentsForPost)}
         // <div>posts: {JSON.stringify(posts)}</div>
+
+        // use routes with components https://github.com/reactjs/react-router-tutorial/tree/master/lessons/06-params
 
         return (
             <div>
@@ -34,30 +40,24 @@ class App extends Component {
                 }} className='icon-btn'>
                     <FaRefresh size={30}/>
                 </button>
-
-                <ul className='categories'>
+                <Route exact path='/' render={()=> (
+                    <div>
                     {categories.map((category) => (
-                        <li className="category" key={category.name}>
-                            <Link to={`/category/${category.path}`} className='open-category'>{category.name}</Link>
-                        </li>
+                        <CategoryView key={category.path} category={category} postsPerCategory={posts.find(postWithCategory => postWithCategory.category === category.path).posts} sortingType={'voteScore'}/>
                     ))}
-                </ul>
-
-                <ul className='categories'>
-                    {categories.map((category) => (
-                        <li className="" key={category.name}>
-                            <div>
-                                {posts.filter(postWithCategory => postWithCategory.category === category.name)[0].posts.map((postValue) => (
-                                    <div key={postValue.id}>{postValue.title}</div>
-                                ))}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+                    </div>
+                )}/> 
+                <Route path='/category/:categoryId' render={(match) => (
+                    this.getCategory(categories, match.params.categoryId) ? 
+                   <CategoryView category={this.getCategory(categories, match.params.categoryId)} 
+                        postsPerCategory={posts.find(postWithCategory => postWithCategory.category === 'redux')} sortingType={'voteScore'}/>
+                        :
+                        <div></div>
+                )}/>
             </div>
         )
     }
-}
+}   
 
 function mapStateToProps({categories, posts}) {
     return {

@@ -21,7 +21,40 @@ const defaultData = {
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
     category: 'redux',
-    voteScore: -5,
+    voteScore: 5,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni6ok3ym7mf1p33lnea": {
+    id: '6ni6ok3ym7mf1p33lnea',
+    timestamp: 1468479767191,
+    title: 'Learn Redux in 100 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: 4,
+    deleted: false,
+    commentCount: 1
+  },
+  "6ni6ok3ym7mf1p33lneb": {
+    id: '6ni6ok3ym7mf1p33lneb',
+    timestamp: 1468479767192,
+    title: 'Learn Redux in 1.000 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: 3,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni6ok3ym7mf1p33lnec": {
+    id: '6ni6ok3ym7mf1p33lnec',
+    timestamp: 1468479767193,
+    title: 'Learn Redux in 10.000 minutes!',
+    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: 2,
     deleted: false,
     commentCount: 0
   }
