@@ -48,14 +48,13 @@ export const reloadPosts = () => dispatch => (
 
 export const reloadPostsForCategory = (categoryId) => dispatch => (
     ReadableAPI.getPostsForCategory(categoryId).then((data) => {
-        // use update posts !!
+        // use update posts ?
         dispatch(setPosts({posts: data}))
     })
 )
 
 export const reloadPost = (postId) => dispatch => (
     ReadableAPI.getPost(postId).then((data) => {
-        console.log('data: ' + data)
         if (data) {
             dispatch(updatePost({post: data}))
         }

@@ -7,15 +7,13 @@ import CategoryComp from './CategoryComp'
 class RootView extends React.Component {
 
     componentDidMount() {
-        const {reloadCategories, reloadPosts, categories, posts} = this.props
+        const {reloadCategories, reloadPosts, categories} = this.props
         if (categories.length === 0) {
             // reload only if needed
             reloadCategories()
         }
-        if (posts.length === 0) {
-            // reload only if needed
-            reloadPosts()
-        }
+        // always reload
+        reloadPosts()
     }
 
     render () {
@@ -24,7 +22,7 @@ class RootView extends React.Component {
             <div>
                 {categories.map((category) => (
                     <CategoryComp key={category.path} category={category}
-                                  posts={posts.find(postWithCategory => postWithCategory.category === category.path).posts}
+                                  posts={posts.filter(post => post.category === category.path)}
                                   sortingType={'voteScore'}/>
                 ))}
             </div>
@@ -35,10 +33,7 @@ class RootView extends React.Component {
 function mapStateToProps({categories, posts}) {
     return {
         categories,
-        posts: categories.map((categoryValue) => ({
-            category: categoryValue.name,
-            posts: posts.filter(post => post.category === categoryValue.name)
-        }))
+        posts
     }
 }
 
