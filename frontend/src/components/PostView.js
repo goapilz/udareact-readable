@@ -12,48 +12,46 @@ class PostView extends React.Component {
     }
 
     componentDidMount() {
-        const {posts} = this.props
-        const {reloadPost} = this.props
+        const {reloadPost, reloadCommentsForPost} = this.props
         const {postId} = this.props.match.params
 
-        const post = posts.find(post => post.id === postId)
-
-        if (!post) {
-            console.log('reload post ' + postId)
+        if (!this.getPost()) {
             reloadPost(postId)
         }
 
         // always reload comments for post
-        reloadCommentsForPost(postId);
+        reloadCommentsForPost(postId)
+    }
+
+    getPost() {
+        const {posts} = this.props
+        const {postId} = this.props.match.params
+        let post = posts.find(post => post.id === postId)
+        return post
+    }
+
+    getComments() {
+        const {comments} = this.props
+        const {postId} = this.props.match.params
+        let commentsPerPost = comments && comments[postId] ? comments[postId] : []
+        return commentsPerPost
     }
 
     render() {
-        const {posts, categories, comments} = this.props
-        const {postId} = this.props.match.params
+        const {categories} = this.props
+        const post = this.getPost()
 
-        const post = posts.find(post => post.id === postId)
-
+        const comments = this.getComments()
         const category = post && categories.find(value => value.path === post.category)
 
-
-        if (post) {
-            return (
-                <div>
-                    <PostComp post={post}/>
-                    <Link className='category-header'
-                          to={category ? `/category/${post.category}` : '/'}>Back
-                        to {category ? category.name : 'Overview'}</Link>
-                </div>
-            )
-        } else {
-            return (
-                <div>
-                    <Link className='category-header'
-                          to={category ? `/category/${post.category}` : '/'}>Back
-                        to {category ? category.name : 'Overview'}</Link>
-                </div>
-            )
-        }
+        return (
+            <div>
+                {post && (<PostComp post={post} comments={comments}/>)}
+                <Link className='category-header'
+                      to={category ? `/category/${post.category}` : '/'}>Back
+                    to {category ? category.name : 'Overview'}</Link>
+            </div>
+        )
     }
 }
 
@@ -61,8 +59,8 @@ function mapStateToProps({categories, posts, comments}) {
     // called before componentDidMount is called - no access to match props
     return {
         categories,
-        posts, // only extract post of id ?
-        comments
+        posts, // only extract post of id ? (not possible her because it is not possible to access the postId)
+        comments // only comments of id ? (not possible her because it is not possible to access the postId)
     }
 }
 

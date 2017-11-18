@@ -55,8 +55,8 @@ export const reloadPosts = () => dispatch => (
 
 export const reloadPostsForCategory = (categoryId) => dispatch => (
     ReadableAPI.getPostsForCategory(categoryId).then((data) => {
-        // curretly does the same as setPosts - optimization: merge new posts into existent in future
-        dispatch(updatePost({posts: data}))
+        // currently does the same as setPosts - optimization: merge new posts into existent in future
+        dispatch(updatePosts({posts: data}))
     })
 )
 
@@ -70,7 +70,10 @@ export const reloadPost = (postId) => dispatch => (
 
 export const reloadCommentsForPost = (postId) => dispatch => (
     ReadableAPI.getCommentsForPost(postId).then((data) => {
-        // remember commets per postId ?? does not make much sense because the user wants fresh data when switching pages/views
-        dispatch(setComments({comments: data}))
+        if (data) {
+            console.log(data)
+            // remember comments per postId ?? does not make much sense because the user wants fresh data when switching pages/views
+            dispatch(setComments({comments: data}))
+        }
     })
 )

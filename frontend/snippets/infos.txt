@@ -6,6 +6,30 @@ postRating
 
 sort
 
+            if (post === undefined) {
+                post = {
+                    id: 0,
+                    title: '',
+                    body: '',
+                    author: '',
+                    timestamp: 0,
+                    voteScore: 0,
+                    category: ''
+                }
+            }
+            if (comments === undefined) {
+                comments = [{
+                    id: 0,
+                    parentId: 0,
+                    title: '',
+                    body: '',
+                    author: '',
+                    timestamp: 0,
+                    voteScore: 0
+                }]
+            }
+
+{book.authors && (<div className='book-authors'>{book.authors.join(', ')}</div>)}
 
 function mapDispatchToProps(dispatch) {
     return {
