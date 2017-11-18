@@ -54,17 +54,14 @@
     width: 500px;
 }
 
-.overview-link {
-    text-align: center;
+.back-link {
+    /* text-align: center;*/
+    font-size: medium;
+    font-weight: bold;
     display: block;
     height: 60px;
 }
 
-.post-summary {
-    position: relative;
-    top: 0px;
-    height: 80px;
-}
 
 .post-header {
     position: relative;
@@ -73,53 +70,48 @@
     height: 30px;
 }
 
-.btn-add {
+.btn-add,
+.btn-edit,
+.btn-delete,
+.btn-vote-up,
+.btn-vote-down {
     position: relative;
-    left: 10px;
-    bottom: 0px;
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background: #60ac5d;
-    background-image: url('../icons/add.svg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: 16px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
     font-size: 0;
+}
+
+.btn-add {
+    left: 10px;
+    background-image: url('../icons/add.svg');
+}
+
+.btn-edit {
+    bottom: 6px;
+    background-image: url('../icons/edit.svg');
+}
+
+.btn-delete {
+    bottom: 6px;
+    background-image: url('../icons/delete.svg');
 }
 
 .btn-vote-up {
-    position: relative;
-    left: 0px;
     bottom: 6px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #60ac5d;
     background-image: url('../icons/starup.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
-    font-size: 0;
 }
 
 .btn-vote-down {
-    position: relative;
-    left: 0px;
     bottom: 6px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: #60ac5d;
     background-image: url('../icons/stardown.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
-    font-size: 0;
 }
+
 
 
 

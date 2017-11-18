@@ -18,9 +18,7 @@ class CategoryComp extends React.Component {
         sortingType: SORTING_TYPE_SCORE
     }
 
-    addPost = (category) => {
-        alert(`add post for ${category.name}`)
-    }
+
 
     sort = (sortingType) => {
         this.setState({sortingType})
@@ -29,6 +27,18 @@ class CategoryComp extends React.Component {
     votePost = (post, option) => {
         const {voteForPost} = this.props
         voteForPost(post.id, option)
+    }
+
+    addPost = (category) => {
+        alert(`add post for ${category.name}`)
+    }
+
+    editPost = (post) => {
+        alert(`edit post ${post.id}`)
+    }
+
+    deletePost = (post) => {
+        alert(`delete post ${post.id}`)
     }
 
     render() {
@@ -63,8 +73,15 @@ class CategoryComp extends React.Component {
                 </div>
                 <div>
                     {sortedPosts.map((post) => (
-                        <div className='post-summary' key={post.id}>
+                        <div key={post.id}>
+                            <button className='btn-edit' onClick={() => {
+                                this.editPost(post)
+                            }}/>
+                            <button className='btn-delete' onClick={() => {
+                                this.deletePost(post)
+                            }}/>
                             <Link to={`/post/${post.id}`}>{post.title}</Link>
+
                             <div className='meta-infos'>
                                 <button className='btn-vote-up' onClick={() => {
                                     this.votePost(post, VOTE_UP)
@@ -74,8 +91,10 @@ class CategoryComp extends React.Component {
                                 }}/>
                                 Score {post.voteScore}</div>
                             <div className='meta-infos'>
-                                Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/> / {post.commentCount} comments
+                                Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/>
+                                / {post.commentCount} comments
                             </div>
+                            <div className='meta-infos'/>
                         </div>
                     ))}
                 </div>

@@ -13,11 +13,6 @@ class PostComp extends React.Component {
         post: PropTypes.object.isRequired
     }
 
-    votePost = (post, option) => {
-        const {voteForPost} = this.props
-        voteForPost(post.id, option)
-    }
-
     componentDidMount() {
         const {reloadCommentsForPost} = this.props
         const {post} = this.props
@@ -26,6 +21,22 @@ class PostComp extends React.Component {
         reloadCommentsForPost(post.id)
     }
 
+    votePost = (post, option) => {
+        const {voteForPost} = this.props
+        voteForPost(post.id, option)
+    }
+
+    addComment = (post) => {
+        alert(`add comment for postId ${post.id}`)
+    }
+
+    editPost = (post) => {
+        alert(`edit post ${post.id}`)
+    }
+
+    deletePost = (post) => {
+        alert(`delete post ${post.id}`)
+    }
 
     render() {
         const {post, comments} = this.props
@@ -37,6 +48,12 @@ class PostComp extends React.Component {
             <div>
                 <div className='post-header'>{post.title}</div>
                 <textarea className='content-text' defaultValue={post.body}/>
+                <button className='btn-edit' onClick={() => {
+                    this.editPost(post)
+                }}/>
+                <button className='btn-delete' onClick={() => {
+                    this.deletePost(post)
+                }}/>
                 <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
                         this.votePost(post, VOTE_UP)
@@ -46,10 +63,15 @@ class PostComp extends React.Component {
                     }}/>
                     Score {post.voteScore}</div>
                 <div className='meta-infos'>
-                    Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/> / {post.commentCount} comments
+                    Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/>
+                    / {post.commentCount} comments
                 </div>
                 <div className='post-header'></div>
-                {sortedComments.length > 0 && (<div className='post-header'>Comments</div>)}
+                {sortedComments.length > 0 && (<div className='post-header'>Comments
+                    <button className='btn-add' style={{left: '10px', bottom: '6px'}} onClick={() => {
+                        this.addComment(post)
+                    }}/>
+                </div>)}
                 {sortedComments.map((comment) => (
                     <CommentComp key={comment.id} comment={comment}/>
                 ))}

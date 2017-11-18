@@ -26,7 +26,7 @@ class CategoryView extends React.Component {
 
         return (
             <div className="app-one-column">
-                <div className="overview-link"><Link to={'/'}>Overview</Link></div>
+                <div className="back-link"><Link to={'/'}>Overview</Link></div>
                 {category && (<CategoryComp category={category}
                               posts={posts}
                               sortingType={'voteScore'}/>)}

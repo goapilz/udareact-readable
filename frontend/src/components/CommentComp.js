@@ -16,12 +16,26 @@ class CommentComp extends React.Component {
         voteForComment(comment.id, option)
     }
 
+    editComment = (comment) => {
+        alert(`edit comment ${comment.id}`)
+    }
+
+    deleteComment = (comment) => {
+        alert(`delete comment ${comment.id}`)
+    }
+
     render() {
         const {comment} = this.props
 
         return (
             <div>
                 <textarea className='content-text' defaultValue={comment.body}/>
+                <button className='btn-edit' onClick={() => {
+                    this.editComment(comment)
+                }}/>
+                <button className='btn-delete' onClick={() => {
+                    this.deleteComment(comment)
+                }}/>
                 <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
                         this.voteComment(comment, VOTE_UP)
