@@ -3,7 +3,6 @@ import {connect} from 'react-redux'
 import {reloadCategories, reloadPosts} from '../actions'
 import CategoryComp from './CategoryComp'
 
-
 class RootView extends React.Component {
 
     componentDidMount() {
@@ -21,6 +20,7 @@ class RootView extends React.Component {
     render () {
         console.log("render RootView")
         const {categories, posts} = this.props
+
         return (
             <div>
                 {categories.map((category) => (

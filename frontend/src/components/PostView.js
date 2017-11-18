@@ -28,29 +28,29 @@ class PostView extends React.Component {
     getPost() {
         const {posts} = this.props
         const {postId} = this.props.match.params
-        let post = posts.find(post => post.id === postId)
+        const post = posts.find(post => post.id === postId)
         return post
     }
 
     getComments() {
         const {comments} = this.props
         const {postId} = this.props.match.params
-        let commentsPerPost = comments && comments[postId] ? comments[postId] : []
-        return commentsPerPost
+        const commentsOfPost = comments && comments[postId] ? comments[postId] : []
+        return commentsOfPost
     }
 
     render() {
         console.log("componentDidMount PostView")
 
         const {categories} = this.props
-        const post = this.getPost()
 
-        const comments = this.getComments()
+        const post = this.getPost()
         const category = post && categories.find(value => value.path === post.category)
+        const comments = this.getComments()
 
         return (
             <div>
-                {post && comments && (<PostComp post={post} comments={comments}/>)}
+                {post && (<PostComp post={post} comments={comments}/>)}
                 <Link className='category-header'
                       to={category ? `/category/${post.category}` : '/'}>Back
                     to {category ? category.name : 'Overview'}</Link>

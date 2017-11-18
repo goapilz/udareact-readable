@@ -53,7 +53,7 @@ function comments(state = initialCommentsState, action) {
         case SET_COMMENTS : {
             const {comments} = action
             const newState = []
-            for (let comment of comments) {
+            for (const comment of comments) {
                 const postId = comment.parentId
                 // init new array for unknown key (postId)
                 if (!newState[postId]) {
