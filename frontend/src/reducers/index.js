@@ -33,10 +33,10 @@ function posts(state = initialPostsState, action) {
             // merge with existing state
             const newState = []
             newState.push(...state)
-
             // find post and do an update or add
             const index = newState.findIndex(x => x.id === post.id);
-            if (index && index >= 0) {
+            if (index >= 0) {
+                console.log(newState[index])
                 newState[index] = post
             } else {
                 newState.push(post)
@@ -75,7 +75,7 @@ function comments(state = initialCommentsState, action) {
             // find comment and do an update or add
             const postId = comment.parentId
             const index = newState[postId].findIndex(x => x.id === comment.id);
-            if (index && index >= 0) {
+            if (index >= 0) {
                 newState[postId][index] = comment
             } else {
                 newState[postId].push(comment)

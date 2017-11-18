@@ -75,11 +75,11 @@ class CategoryComp extends React.Component {
                             <div>
                                 <button className='btn-vote-up' onClick={() => {
                                     this.votePost(post, 'upVote')
-                                }}>vote
+                                }}>upVote
                                 </button>
                                 <button className='btn-vote-down' onClick={() => {
                                     this.votePost(post, 'downVote')
-                                }}>vote
+                                }}>downVote
                                 </button>
                                 VoteScore: {post.voteScore}
                             </div>
