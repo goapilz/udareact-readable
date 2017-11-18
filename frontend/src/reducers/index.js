@@ -7,9 +7,10 @@ const initialCommentsState = []
 
 function categories(state = initialCategoriesState, action) {
     switch (action.type) {
-        case SET_CATEGORIES :
+        case SET_CATEGORIES : {
             const {categories} = action
             return categories
+        }
         default :
             return state
     }
@@ -17,13 +18,19 @@ function categories(state = initialCategoriesState, action) {
 
 function posts(state = initialPostsState, action) {
     switch (action.type) {
-        case SET_POSTS || UPDATE_POSTS :
+        case SET_POSTS : {
             // TODO also do a merge for UPDATE_POSTS
             const {posts} = action
             return posts
-        case UPDATE_POST :
+        }
+        case UPDATE_POSTS : {
+            // TODO also do a merge for UPDATE_POSTS
+            const {posts} = action
+            return posts
+        }
+        case UPDATE_POST : {
             const {post} = action
-
+            // merge with existing state
             const newState = []
             newState.push(...state)
             const index = newState.findIndex(x => x.id === post.id);
@@ -32,8 +39,8 @@ function posts(state = initialPostsState, action) {
             } else {
                 newState.push(post)
             }
-
             return newState
+        }
         default :
             return state
     }
@@ -43,11 +50,11 @@ function comments(state = initialCommentsState, action) {
     // structure with postId as key and array of comments
     // TODO do this also for posts ?
     switch (action.type) {
-        case SET_COMMENTS :
+        case SET_COMMENTS : {
             const {comments} = action
             const newState = []
             for (let comment of comments) {
-                const postId =  comment.parentId
+                const postId = comment.parentId
                 // init new array for unknown key (postId)
                 if (!newState[postId]) {
                     newState[postId] = []
@@ -56,6 +63,7 @@ function comments(state = initialCommentsState, action) {
                 newState[postId].push(comment)
             }
             return newState
+        }
         default :
             return state
     }

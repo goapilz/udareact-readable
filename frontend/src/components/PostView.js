@@ -12,6 +12,8 @@ class PostView extends React.Component {
     }
 
     componentDidMount() {
+        console.log("componentDidMount PostView")
+
         const {reloadPost, reloadCommentsForPost} = this.props
         const {postId} = this.props.match.params
 
@@ -38,6 +40,8 @@ class PostView extends React.Component {
     }
 
     render() {
+        console.log("componentDidMount PostView")
+
         const {categories} = this.props
         const post = this.getPost()
 
@@ -46,7 +50,7 @@ class PostView extends React.Component {
 
         return (
             <div>
-                {post && (<PostComp post={post} comments={comments}/>)}
+                {post && comments && (<PostComp post={post} comments={comments}/>)}
                 <Link className='category-header'
                       to={category ? `/category/${post.category}` : '/'}>Back
                     to {category ? category.name : 'Overview'}</Link>
