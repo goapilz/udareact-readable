@@ -8,6 +8,7 @@ export const UPDATE_POSTS = 'UPDATE_POSTS'
 
 export const SET_COMMENTS = 'SET_COMMENTS'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+export const UPDATE_COMMENTS = 'UPDATE_COMMENTS'
 
 export function setCategories({categories}) {
     return {
@@ -23,6 +24,13 @@ export function setPosts({posts}) {
     }
 }
 
+export function updatePost({post}) {
+    return {
+        type: UPDATE_POST,
+        post
+    }
+}
+
 export function updatePosts({posts}) {
     return {
         type: UPDATE_POSTS,
@@ -30,12 +38,6 @@ export function updatePosts({posts}) {
     }
 }
 
-export function updatePost({post}) {
-    return {
-        type: UPDATE_POST,
-        post
-    }
-}
 
 export function setComments({comments}) {
     return {
@@ -48,6 +50,13 @@ export function updateComment({comment}) {
     return {
         type: UPDATE_COMMENT,
         comment
+    }
+}
+
+export function updateComments({comments}) {
+    return {
+        type: UPDATE_COMMENTS,
+        comments
     }
 }
 
@@ -65,7 +74,6 @@ export const reloadPosts = () => dispatch => (
 
 export const reloadPostsForCategory = (categoryId) => dispatch => (
     ReadableAPI.getPostsForCategory(categoryId).then((data) => {
-        // currently does the same as setPosts - optimization: merge new posts into existent in future
         dispatch(updatePosts({posts: data}))
     })
 )
@@ -81,9 +89,7 @@ export const reloadPost = (postId) => dispatch => (
 export const reloadCommentsForPost = (postId) => dispatch => (
     ReadableAPI.getCommentsForPost(postId).then((data) => {
         if (data) {
-            console.log(data)
-            // remember comments per postId ?? does not make much sense because the user wants fresh data when switching pages/views
-            dispatch(setComments({comments: data}))
+            dispatch(updateComments({comments: data}))
         }
     })
 )
