@@ -12,15 +12,19 @@ class CommentComp extends React.Component {
         editMode: false
     }
 
+    voteComment = (comment) => {
+        alert(`vote for comment ${comment.id}`)
+    }
+
     render() {
         const {comment} = this.props
 
         return (
-            <div className='post-details'>
+            <div className='comment'>
                 <div>Content: {comment.body}</div>
                 <div>Author: {comment.author}</div>
                 <div>Date: <Time value={comment.timestamp} titleFormat='YYYY/MM/DD HH:mm'/></div>
-                <div>VoteScore: {comment.voteScore}</div>
+                <div>VoteScore: {comment.voteScore}<button className='btn-vote' onClick={() => { this.voteComment(comment)}}>vote</button></div>
             </div>
         )
     }

@@ -1,0 +1,97 @@
+.app {
+    width: 100%;
+    height: 100%;
+}
+
+.app-three-columns {
+    display: flex;
+    height: 100%;
+}
+
+.app-one-column {
+    margin: 0 auto;
+    width: 33%;
+    height: 100%;
+}
+
+.category-block {
+    padding: 1pt;
+    margin: 1pt;
+    width: 33%;
+    height: 100%;
+}
+
+.sorting {
+    position: relative;
+    display: block;
+    left: 0px;
+    bottom: 0px;
+    width: 250px;
+}
+
+.category-header {
+}
+
+.posts-block {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+}
+
+.post-summary {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+}
+
+.post-details {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+}
+
+.comments-block {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+}
+
+.comment {
+    position: relative;
+    left: 0px;
+    bottom: 0px;
+}
+
+.btn-add {
+    position: relative;
+    left: 10px;
+    bottom: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #60ac5d;
+    background-image: url('../icons/add.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+    font-size: 0;
+}
+
+.btn-vote {
+    position: relative;
+    left: 10px;
+    bottom: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #60ac5d;
+    background-image: url('../icons/starrate.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.23);
+    font-size: 0;
+}
+
+

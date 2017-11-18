@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './../css/App.css'
+import '../css/app.css'
 import CategoryView from './CategoryView'
 import RootView from './RootView'
 import PostView from './PostView'
@@ -9,7 +9,7 @@ class App extends Component {
 
     render() {
         return (
-            <div>
+            <div className="app">
                 <Route exact path='/' component={RootView}/>
                 <Route path='/category/:categoryId' component={CategoryView}/>
                 <Route path='/post/:postId' component={PostView}/>

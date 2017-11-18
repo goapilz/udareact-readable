@@ -21,7 +21,7 @@ class RootView extends React.Component {
         const {categories, posts} = this.props
 
         return (
-            <div>
+            <div className="app-three-columns">
                 {categories.map((category) => (
                     <CategoryComp key={category.path} category={category}
                                   posts={posts.filter(post => post.category === category.path)}

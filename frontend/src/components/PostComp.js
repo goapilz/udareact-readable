@@ -10,6 +10,10 @@ class PostComp extends React.Component {
         post: PropTypes.object.isRequired
     }
 
+    votePost= (post) => {
+        alert(`vote for post ${post.id}`)
+    }
+
     render() {
         const {post, comments} = this.props
 
@@ -19,8 +23,9 @@ class PostComp extends React.Component {
                 <div>Content: {post.body}</div>
                 <div>Author: {post.author}</div>
                 <div>Date: <Time value={post.timestamp} titleFormat='YYYY/MM/DD HH:mm'/></div>
-                <div>VoteScore: {post.voteScore}</div>
+                <div>VoteScore: {post.voteScore} <button className='btn-vote' onClick={() => { this.votePost(post)}}>vote</button></div>
 
+                {comments.length > 0 && (<div className='comments-block'>Comments:</div>)}
                 {comments.map((comment) => (
                     <CommentComp key={comment.id} comment={comment}/>
                 ))}

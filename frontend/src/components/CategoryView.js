@@ -25,11 +25,11 @@ class CategoryView extends React.Component {
         const category = categories.find(value => value.path === categoryId)
 
         return (
-            <div>
+            <div className="app-one-column">
+                <Link to={'/'}>Overview</Link>
                 <CategoryComp category={category}
                               posts={posts}
                               sortingType={'voteScore'}/>
-                <Link to={'/'}>Overview</Link>
             </div>
         )
     }

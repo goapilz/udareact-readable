@@ -22,6 +22,10 @@ class CategoryComp extends React.Component {
         this.setState({sortingType})
     }
 
+    votePost = (post) => {
+        alert(`vote for post ${post.id}`)
+    }
+
     render() {
         const {category, posts} = this.props
         const {sortingType} = this.state
@@ -38,35 +42,42 @@ class CategoryComp extends React.Component {
         }
 
         return (
-            <div className='category-column'>
-                <Link className='category-header'
-                      to={`/category/${category ? category.path : ''}`}>{category ? category.name : ''}</Link>
-                <div>Sorting:
-                    <button className='' onClick={() => {
-                        this.sort('timestamp')
-                    }}>Date
-                    </button>
-                    <button className='' onClick={() => {
-                        this.sort('voteScore')
-                    }}>Score
-                    </button>
-                    <button className='' onClick={() => {
-                        this.sort('commentCount')
-                    }}>Comments
-                    </button>
+            <div className='category-block'>
+                <div className='category-header'>
+                    <Link
+                        to={`/category/${category ? category.path : ''}`}>{category ? category.name : ''}</Link>
+                    <button className='btn-add' onClick={() => {
+                        this.addPost(category)
+                    }}/>
+                    <div className='sorting'>Sorting:
+                        <button className='' onClick={() => {
+                            this.sort('timestamp')
+                        }}>Date
+                        </button>
+                        <button className='' onClick={() => {
+                            this.sort('voteScore')
+                        }}>Score
+                        </button>
+                        <button className='' onClick={() => {
+                            this.sort('commentCount')
+                        }}>Comments
+                        </button>
+                    </div>
                 </div>
-                <div className='post-column'>
+                <div className='posts-block'>
                     {sortedPosts.map((post) => (
-                        <div className='post' key={post.id}>
+                        <div className='post-summary' key={post.id}>
                             <Link to={`/post/${post.id}`}>{post.title}</Link>
-                            <div className='postData'>Score:{post.voteScore} Comments:{post.commentCount}
-                                Date:{post.timestamp}</div>
+                            <div>CommentCount:{post.commentCount} Date:{post.timestamp}</div>
+                            <div>VoteScore: {post.voteScore}
+                                <button className='btn-vote' onClick={() => {
+                                    this.votePost(post)
+                                }}>vote
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
-                <button className='add-post' onClick={() => {
-                    this.addPost(category)
-                }}/>
             </div>
         )
     }
