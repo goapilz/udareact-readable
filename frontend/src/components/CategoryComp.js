@@ -3,17 +3,19 @@ import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
 import {voteForPost} from '../actions'
+import {SORTING_TYPE_SCORE, SORTING_TYPE_DATE, SORTING_TYPE_COMMENT_COUNT, VOTE_UP, VOTE_DOWN} from '../util/Constants'
 import {connect} from 'react-redux'
+import Time from 'react-time'
 
 class CategoryComp extends React.Component {
 
     static propTypes = {
-        category: PropTypes.object,
+        category: PropTypes.object.isRequired,
         posts: PropTypes.array.isRequired
     }
 
     state = {
-        sortingType: 'voteScore'
+        sortingType: SORTING_TYPE_SCORE
     }
 
     addPost = (category) => {
@@ -33,16 +35,8 @@ class CategoryComp extends React.Component {
         const {category, posts} = this.props
         const {sortingType} = this.state
 
-        const sortedPosts = posts ? posts : [];
-        if (sortingType === 'voteScore') {
-            sortedPosts.sort(sortBy('voteScore'))
-        }
-        if (sortingType === 'timestamp') {
-            sortedPosts.sort(sortBy('timestamp'))
-        }
-        if (sortingType === 'commentCount') {
-            sortedPosts.sort(sortBy('commentCount'))
-        }
+        const sortedPosts = posts.filter(post => post.category === category.path)
+        sortedPosts.sort(sortBy(sortingType))
 
         return (
             <div className='category-block'>
@@ -54,15 +48,15 @@ class CategoryComp extends React.Component {
                     }}/>
                     <div className='sorting'>Sorting:
                         <button className='' onClick={() => {
-                            this.sort('timestamp')
+                            this.sort(SORTING_TYPE_DATE)
                         }}>Date
                         </button>
                         <button className='' onClick={() => {
-                            this.sort('voteScore')
+                            this.sort(SORTING_TYPE_SCORE)
                         }}>Score
                         </button>
                         <button className='' onClick={() => {
-                            this.sort('commentCount')
+                            this.sort(SORTING_TYPE_COMMENT_COUNT)
                         }}>Comments
                         </button>
                     </div>
@@ -71,17 +65,16 @@ class CategoryComp extends React.Component {
                     {sortedPosts.map((post) => (
                         <div className='post-summary' key={post.id}>
                             <Link to={`/post/${post.id}`}>{post.title}</Link>
-                            <div>CommentCount:{post.commentCount} Date:{post.timestamp}</div>
-                            <div>
+                            <div className='meta-infos'>
                                 <button className='btn-vote-up' onClick={() => {
-                                    this.votePost(post, 'upVote')
-                                }}>upVote
-                                </button>
+                                    this.votePost(post, VOTE_UP)
+                                }}/>
                                 <button className='btn-vote-down' onClick={() => {
-                                    this.votePost(post, 'downVote')
-                                }}>downVote
-                                </button>
-                                VoteScore: {post.voteScore}
+                                    this.votePost(post, VOTE_DOWN)
+                                }}/>
+                                Score {post.voteScore}</div>
+                            <div className='meta-infos'>
+                                Date: <Time value={post.timestamp} format='YYYY/MM/DD'/> {post.commentCount} comments
                             </div>
                         </div>
                     ))}

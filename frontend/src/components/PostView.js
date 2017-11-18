@@ -30,10 +30,10 @@ class PostView extends React.Component {
 
         return (
             <div>
-                {post && (<PostComp post={post}/>)}
                 <Link className='category-header'
                       to={category ? `/category/${post.category}` : '/'}>Back
                     to {category ? category.name : 'Overview'}</Link>
+                {post && (<PostComp post={post}/>)}
             </div>
         )
     }

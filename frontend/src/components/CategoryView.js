@@ -14,7 +14,7 @@ class CategoryView extends React.Component {
             // reload only if needed
             reloadCategories()
         }
-        // always reload
+        // always reload (but only relevant posts)
         reloadPostsForCategory(categoryId)
     }
 
@@ -27,9 +27,9 @@ class CategoryView extends React.Component {
         return (
             <div className="app-one-column">
                 <div className="overview-link"><Link to={'/'}>Overview</Link></div>
-                <CategoryComp category={category}
+                {category && (<CategoryComp category={category}
                               posts={posts}
-                              sortingType={'voteScore'}/>
+                              sortingType={'voteScore'}/>)}
             </div>
         )
     }

@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
 import {voteForComment} from '../actions'
+import {VOTE_UP, VOTE_DOWN} from '../util/Constants'
 import {connect} from 'react-redux'
 
 class CommentComp extends React.Component {
@@ -19,20 +20,19 @@ class CommentComp extends React.Component {
         const {comment} = this.props
 
         return (
-            <div className='comment'>
-                <div>Content: {comment.body}</div>
-                <div>Author: {comment.author}</div>
-                <div>Date: <Time value={comment.timestamp} titleFormat='YYYY/MM/DD HH:mm'/></div>
-                <div>
+            <div>
+                <textarea className='content' defaultValue={comment.body}/>
+                <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
-                        this.voteComment(comment, 'upVote')
-                    }}>upVote
-                    </button>
+                        this.voteComment(comment, VOTE_UP)
+                    }}/>
                     <button className='btn-vote-down' onClick={() => {
-                        this.voteComment(comment, 'downVote')
-                    }}>downVote
-                    </button>
-                    VoteScore: {comment.voteScore}</div>
+                        this.voteComment(comment, VOTE_DOWN)
+                    }}/>
+                    Score {comment.voteScore}</div>
+                <div className='meta-infos'>
+                    Author: {comment.author} / Date: <Time value={comment.timestamp} format='YYYY/MM/DD HH:mm'/>
+                </div>
             </div>
         )
     }

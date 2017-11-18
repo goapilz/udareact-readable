@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 import Time from 'react-time'
 import CommentComp from './CommentComp'
 import {voteForPost, reloadCommentsForPost} from '../actions'
+import {VOTE_UP, VOTE_DOWN} from '../util/Constants'
 import {connect} from 'react-redux'
+import sortBy from 'sort-by'
 
 class PostComp extends React.Component {
 
@@ -20,7 +22,7 @@ class PostComp extends React.Component {
         const {reloadCommentsForPost} = this.props
         const {post} = this.props
 
-        // always reload comments for post
+        // always reload comments for post - will be merged with other comments
         reloadCommentsForPost(post.id)
     }
 
@@ -28,25 +30,27 @@ class PostComp extends React.Component {
     render() {
         const {post, comments} = this.props
 
+        const sortedComments = comments.filter(comment => comment.parentId === post.id)
+        sortedComments.sort(sortBy('timestamp'))
+
         return (
-            <div className='post-details'>
-                <div>Title: {post.title}</div>
-                <div>Content: {post.body}</div>
-                <div>Author: {post.author}</div>
-                <div>Date: <Time value={post.timestamp} titleFormat='YYYY/MM/DD HH:mm'/></div>
-                <div>
+            <div>
+                <div className='post-header'>{post.title}</div>
+                <textarea className='content' defaultValue={post.body}/>
+                <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
-                        this.votePost(post, 'upVote')
-                    }}>upVote
-                    </button>
+                        this.votePost(post, VOTE_UP)
+                    }}/>
                     <button className='btn-vote-down' onClick={() => {
-                        this.votePost(post, 'downVote')
-                    }}>downVote
-                    </button>
-                    VoteScore: {post.voteScore}
+                        this.votePost(post, VOTE_DOWN)
+                    }}/>
+                    Score {post.voteScore}</div>
+                <div className='meta-infos'>
+                    Author: {post.author} / Date: <Time value={post.timestamp} format='YYYY/MM/DD'/> / {post.commentCount} comments
                 </div>
-                {comments.length > 0 && (<div className='comments-block'>Comments:</div>)}
-                {comments.map((comment) => (
+                <div className='post-header'></div>
+                {sortedComments.length > 0 && (<div className='post-header'>Comments</div>)}
+                {sortedComments.map((comment) => (
                     <CommentComp key={comment.id} comment={comment}/>
                 ))}
             </div>

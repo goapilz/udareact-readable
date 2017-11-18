@@ -22,16 +22,36 @@
 }
 
 .category-header {
+    font-size: large;
+    font-weight: bold;
     display: flex;
-    height: 70px;
+    height: 50px;
 }
 
 .sorting {
+    font-size: small;
+    font-weight: normal;
     position: relative;
     display: block;
     left: 16px;
     bottom: 0px;
     width: 250px;
+}
+
+.meta-infos {
+    position: relative;
+    top: 18px;
+    font-size: small;
+    font-weight: bold;
+}
+
+.content {
+    position: relative;
+    font-size: medium;
+    font-weight: normal;
+    top: 10px;
+    height: 60px;
+    width: 500px;
 }
 
 .overview-link {
@@ -48,26 +68,15 @@
 
 .post-summary {
     position: relative;
-    left: 0px;
-    bottom: 0px;
+    top: 0px;
+    height: 80px;
 }
 
-.post-details {
+.post-header {
     position: relative;
-    left: 0px;
-    bottom: 0px;
-}
-
-.comments-block {
-    position: relative;
-    left: 0px;
-    bottom: 0px;
-}
-
-.comment {
-    position: relative;
-    left: 0px;
-    bottom: 0px;
+    font-size: large;
+    font-weight: bold;
+    height: 30px;
 }
 
 .btn-add {
