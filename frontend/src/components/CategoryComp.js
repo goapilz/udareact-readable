@@ -2,6 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
+import {voteForPost, voteForComment} from '../actions'
+import {connect} from 'react-redux'
 
 class CategoryComp extends React.Component {
 
@@ -22,8 +24,9 @@ class CategoryComp extends React.Component {
         this.setState({sortingType})
     }
 
-    votePost = (post) => {
-        alert(`vote for post ${post.id}`)
+    votePost = (post, option) => {
+        const {voteForPost} = this.props
+        voteForPost(post.id, option)
     }
 
     render() {
@@ -69,11 +72,16 @@ class CategoryComp extends React.Component {
                         <div className='post-summary' key={post.id}>
                             <Link to={`/post/${post.id}`}>{post.title}</Link>
                             <div>CommentCount:{post.commentCount} Date:{post.timestamp}</div>
-                            <div>VoteScore: {post.voteScore}
-                                <button className='btn-vote' onClick={() => {
-                                    this.votePost(post)
+                            <div>
+                                <button className='btn-vote-up' onClick={() => {
+                                    this.votePost(post, 'upVote')
                                 }}>vote
                                 </button>
+                                <button className='btn-vote-down' onClick={() => {
+                                    this.votePost(post, 'downVote')
+                                }}>vote
+                                </button>
+                                VoteScore: {post.voteScore}
                             </div>
                         </div>
                     ))}
@@ -83,4 +91,15 @@ class CategoryComp extends React.Component {
     }
 }
 
-export default CategoryComp
+function mapStateToProps() {
+    return {}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        voteForPost: (postId, option) => dispatch(voteForPost(postId, option)),
+        voteForComment: (commentId, option) => dispatch(voteForComment(commentId, option)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryComp)

@@ -7,6 +7,7 @@ if (!token)
 
 const headers = {
     'Accept': 'application/json',
+    'Content-Type': 'application/json',
     'Authorization': token
 }
 
@@ -55,6 +56,28 @@ export const getCommentsForPost = (postId) =>
         .then((data) => {
             return data
         })
+
+export const voteForPost = (postId, option) =>
+    fetch(`${APP_BACKEND}/posts/${postId}`, {
+        method: 'POST', headers, body: JSON.stringify({
+            option: option
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
+
+export const voteForComment = (commentId, option) =>
+    fetch(`${APP_BACKEND}/comments/${commentId}`, {
+        method: 'POST', headers, body: JSON.stringify({
+            option: option
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
 
 export const addPost = (categoryId, postId) => {
     // categoryId needed ?

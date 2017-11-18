@@ -1,10 +1,13 @@
 import * as ReadableAPI from './../util/ReadableAPI'
 
 export const SET_CATEGORIES = 'SET_CATEGORIES'
+
 export const SET_POSTS = 'SET_POSTS'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_POSTS = 'UPDATE_POSTS'
+
 export const SET_COMMENTS = 'SET_COMMENTS'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 
 export function setCategories({categories}) {
     return {
@@ -38,6 +41,13 @@ export function setComments({comments}) {
     return {
         type: SET_COMMENTS,
         comments
+    }
+}
+
+export function updateComment({comment}) {
+    return {
+        type: UPDATE_COMMENT,
+        comment
     }
 }
 
@@ -75,5 +85,17 @@ export const reloadCommentsForPost = (postId) => dispatch => (
             // remember comments per postId ?? does not make much sense because the user wants fresh data when switching pages/views
             dispatch(setComments({comments: data}))
         }
+    })
+)
+
+export const voteForPost = (postId, option) => dispatch => (
+    ReadableAPI.voteForPost(postId, option).then((data) => {
+        dispatch(updatePost({post: data}))
+    })
+)
+
+export const voteForComment = (commentId, option) => dispatch => (
+    ReadableAPI.voteForComment(commentId, option).then((data) => {
+        dispatch(updateComment({comment: data}))
     })
 )

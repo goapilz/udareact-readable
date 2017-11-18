@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import {SET_CATEGORIES, SET_POSTS, UPDATE_POST, UPDATE_POSTS, SET_COMMENTS} from '../actions'
+import {SET_CATEGORIES, SET_POSTS, UPDATE_POST, UPDATE_POSTS, SET_COMMENTS, UPDATE_COMMENT} from '../actions'
 
 const initialCategoriesState = []
 const initialPostsState = []
@@ -33,6 +33,8 @@ function posts(state = initialPostsState, action) {
             // merge with existing state
             const newState = []
             newState.push(...state)
+
+            // find post and do an update or add
             const index = newState.findIndex(x => x.id === post.id);
             if (index && index >= 0) {
                 newState[index] = post
@@ -62,6 +64,23 @@ function comments(state = initialCommentsState, action) {
                 // append comments for postId
                 newState[postId].push(comment)
             }
+            return newState
+        }
+        case UPDATE_COMMENT : {
+            const {comment} = action
+            // merge with existing state
+            const newState = []
+            newState.push(...state)
+
+            // find comment and do an update or add
+            const postId = comment.parentId
+            const index = newState[postId].findIndex(x => x.id === comment.id);
+            if (index && index >= 0) {
+                newState[postId][index] = comment
+            } else {
+                newState[postId].push(comment)
+            }
+
             return newState
         }
         default :
