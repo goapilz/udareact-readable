@@ -3,8 +3,8 @@ import * as ReadableAPI from './../util/ReadableAPI'
 export const SET_CATEGORIES = 'SET_CATEGORIES'
 export const SET_POSTS = 'SET_POSTS'
 export const UPDATE_POST = 'UPDATE_POST'
-export const SET_POSTS_OF_CATEGORY = 'SET_POSTS_OF_CATEGORY'
-export const SET_COMMENTS_OF_POST = 'SET_COMMENTS_OF_POST'
+export const UPDATE_POSTS = 'UPDATE_POSTS'
+export const SET_COMMENTS = 'SET_COMMENTS'
 
 export function setCategories({categories}) {
     return {
@@ -20,6 +20,13 @@ export function setPosts({posts}) {
     }
 }
 
+export function updatePosts({posts}) {
+    return {
+        type: UPDATE_POSTS,
+        posts
+    }
+}
+
 export function updatePost({post}) {
     return {
         type: UPDATE_POST,
@@ -27,10 +34,10 @@ export function updatePost({post}) {
     }
 }
 
-export function setComments({commentsOfPost}) {
+export function setComments({comments}) {
     return {
-        type: SET_COMMENTS_OF_POST,
-        commentsOfPost
+        type: SET_COMMENTS,
+        comments
     }
 }
 
@@ -48,8 +55,8 @@ export const reloadPosts = () => dispatch => (
 
 export const reloadPostsForCategory = (categoryId) => dispatch => (
     ReadableAPI.getPostsForCategory(categoryId).then((data) => {
-        // use update posts ?
-        dispatch(setPosts({posts: data}))
+        // curretly does the same as setPosts - optimization: merge new posts into existent in future
+        dispatch(updatePost({posts: data}))
     })
 )
 
@@ -63,7 +70,7 @@ export const reloadPost = (postId) => dispatch => (
 
 export const reloadCommentsForPost = (postId) => dispatch => (
     ReadableAPI.getCommentsForPost(postId).then((data) => {
-        dispatch(setComments({commentsOfPost: data}))
+        // remember commets per postId ?? does not make much sense because the user wants fresh data when switching pages/views
+        dispatch(setComments({comments: data}))
     })
 )
-

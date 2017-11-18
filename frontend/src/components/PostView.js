@@ -1,10 +1,15 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {reloadPost} from '../actions'
+import {reloadPost, reloadCommentsForPost} from '../actions'
 import PostComp from './PostComp'
 
 class PostView extends React.Component {
+
+    state = {
+        postEditable: false,
+        editableCommentId: -1
+    }
 
     componentDidMount() {
         const {posts} = this.props
@@ -17,15 +22,19 @@ class PostView extends React.Component {
             console.log('reload post ' + postId)
             reloadPost(postId)
         }
+
+        // always reload comments for post
+        reloadCommentsForPost(postId);
     }
 
     render() {
-        const {posts, categories} = this.props
+        const {posts, categories, comments} = this.props
         const {postId} = this.props.match.params
 
         const post = posts.find(post => post.id === postId)
 
         const category = post && categories.find(value => value.path === post.category)
+
 
         if (post) {
             return (
@@ -48,18 +57,20 @@ class PostView extends React.Component {
     }
 }
 
-function mapStateToProps({categories, posts}) {
+function mapStateToProps({categories, posts, comments}) {
+    // called before componentDidMount is called - no access to match props
     return {
         categories,
-        posts
+        posts, // only extract post of id ?
+        comments
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        reloadPost: (postId) => dispatch(reloadPost(postId))
+        reloadPost: (postId) => dispatch(reloadPost(postId)),
+        reloadCommentsForPost: (postId) => dispatch(reloadCommentsForPost(postId))
     }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostView)
-
