@@ -12,8 +12,6 @@ class PostView extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount PostView")
-
         const {reloadPost, reloadCommentsForPost} = this.props
         const {postId} = this.props.match.params
 
@@ -40,8 +38,6 @@ class PostView extends React.Component {
     }
 
     render() {
-        console.log("componentDidMount PostView")
-
         const {categories} = this.props
 
         const post = this.getPost()

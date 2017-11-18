@@ -7,8 +7,6 @@ import CategoryComp from './CategoryComp'
 class CategoryView extends React.Component {
 
     componentDidMount() {
-        console.log("componentDidMount CategoryView")
-
         const {reloadCategories, reloadPostsForCategory, categories} = this.props
         const {categoryId} = this.props.match.params
 
@@ -21,7 +19,6 @@ class CategoryView extends React.Component {
     }
 
     render() {
-        console.log("render CategoryView")
         const {categories, posts} = this.props
         const {categoryId} = this.props.match.params
 
