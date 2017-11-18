@@ -40,17 +40,17 @@
 
 .meta-infos {
     position: relative;
-    top: 18px;
+    top: 4px;
+    height: 24px;
     font-size: small;
     font-weight: bold;
 }
 
-.content {
+.content-text {
     position: relative;
     font-size: medium;
     font-weight: normal;
-    top: 10px;
-    height: 60px;
+    height: 80px;
     width: 500px;
 }
 
@@ -58,12 +58,6 @@
     text-align: center;
     display: block;
     height: 60px;
-}
-
-.posts-block {
-    position: relative;
-    left: 0px;
-    bottom: 0px;
 }
 
 .post-summary {

@@ -61,7 +61,7 @@ class CategoryComp extends React.Component {
                         </button>
                     </div>
                 </div>
-                <div className='posts-block'>
+                <div>
                     {sortedPosts.map((post) => (
                         <div className='post-summary' key={post.id}>
                             <Link to={`/post/${post.id}`}>{post.title}</Link>
@@ -74,7 +74,7 @@ class CategoryComp extends React.Component {
                                 }}/>
                                 Score {post.voteScore}</div>
                             <div className='meta-infos'>
-                                Date: <Time value={post.timestamp} format='YYYY/MM/DD'/> {post.commentCount} comments
+                                Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/> / {post.commentCount} comments
                             </div>
                         </div>
                     ))}

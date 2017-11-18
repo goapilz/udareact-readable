@@ -21,7 +21,7 @@ class CommentComp extends React.Component {
 
         return (
             <div>
-                <textarea className='content' defaultValue={comment.body}/>
+                <textarea className='content-text' defaultValue={comment.body}/>
                 <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
                         this.voteComment(comment, VOTE_UP)
@@ -31,8 +31,9 @@ class CommentComp extends React.Component {
                     }}/>
                     Score {comment.voteScore}</div>
                 <div className='meta-infos'>
-                    Author: {comment.author} / Date: <Time value={comment.timestamp} format='YYYY/MM/DD HH:mm'/>
+                    Author: {comment.author} / Date: <Time value={comment.timestamp} format='DD.MM.YYYY (HH:mm)'/>
                 </div>
+                <div className='meta-infos'/>
             </div>
         )
     }

@@ -39,7 +39,7 @@ class PostView extends React.Component {
     }
 }
 
-function mapStateToProps({categories, posts, comments}) {
+function mapStateToProps({categories, posts}) {
     // called before componentDidMount is called - no access to match props
     return {
         categories,
