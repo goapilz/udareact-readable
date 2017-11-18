@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
-import {voteForPost, voteForComment} from '../actions'
+import {voteForPost} from '../actions'
 import {connect} from 'react-redux'
 
 class CategoryComp extends React.Component {
@@ -97,8 +97,7 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
-        voteForPost: (postId, option) => dispatch(voteForPost(postId, option)),
-        voteForComment: (commentId, option) => dispatch(voteForComment(commentId, option)),
+        voteForPost: (postId, option) => dispatch(voteForPost(postId, option))
     }
 }
 

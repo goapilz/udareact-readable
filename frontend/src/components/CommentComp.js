@@ -1,6 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
+import {voteForComment} from '../actions'
+import {connect} from 'react-redux'
 
 class CommentComp extends React.Component {
 
@@ -8,12 +10,9 @@ class CommentComp extends React.Component {
         comment: PropTypes.object.isRequired
     }
 
-    state = {
-        editMode: false
-    }
-
-    voteComment = (comment) => {
-        alert(`vote for comment ${comment.id}`)
+    voteComment = (comment, option) => {
+        const {voteForComment} = this.props
+        voteForComment(comment.id, option)
     }
 
     render() {
@@ -24,10 +23,29 @@ class CommentComp extends React.Component {
                 <div>Content: {comment.body}</div>
                 <div>Author: {comment.author}</div>
                 <div>Date: <Time value={comment.timestamp} titleFormat='YYYY/MM/DD HH:mm'/></div>
-                <div>VoteScore: {comment.voteScore}<button className='btn-vote' onClick={() => { this.voteComment(comment)}}>vote</button></div>
+                <div>
+                    <button className='btn-vote-up' onClick={() => {
+                        this.voteComment(comment, 'upVote')
+                    }}>upVote
+                    </button>
+                    <button className='btn-vote-down' onClick={() => {
+                        this.voteComment(comment, 'downVote')
+                    }}>downVote
+                    </button>
+                    VoteScore: {comment.voteScore}</div>
             </div>
         )
     }
 }
 
-export default CommentComp
+function mapStateToProps() {
+    return {}
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        voteForComment: (commentId, option) => dispatch(voteForComment(commentId, option))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CommentComp)

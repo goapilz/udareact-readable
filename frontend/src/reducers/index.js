@@ -19,7 +19,6 @@ function categories(state = initialCategoriesState, action) {
 function posts(state = initialPostsState, action) {
     switch (action.type) {
         case SET_POSTS : {
-            // TODO also do a merge for UPDATE_POSTS
             const {posts} = action
             return posts
         }
@@ -49,38 +48,23 @@ function posts(state = initialPostsState, action) {
 }
 
 function comments(state = initialCommentsState, action) {
-    // structure with postId as key and array of comments
-    // TODO do this also for posts ?
     switch (action.type) {
         case SET_COMMENTS : {
             const {comments} = action
-            const newState = []
-            for (const comment of comments) {
-                const postId = comment.parentId
-                // init new array for unknown key (postId)
-                if (!newState[postId]) {
-                    newState[postId] = []
-                }
-                // append comments for postId
-                newState[postId].push(comment)
-            }
-            return newState
+            return comments
         }
         case UPDATE_COMMENT : {
             const {comment} = action
-            // merge with existing state
+
             const newState = []
             newState.push(...state)
 
-            // find comment and do an update or add
-            const postId = comment.parentId
-            const index = newState[postId].findIndex(x => x.id === comment.id);
+            const index = newState.findIndex(x => x.id === comment.id);
             if (index >= 0) {
-                newState[postId][index] = comment
+                newState[index] = comment
             } else {
-                newState[postId].push(comment)
+                newState.push(comment)
             }
-
             return newState
         }
         default :
