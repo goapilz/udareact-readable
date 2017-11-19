@@ -26,5 +26,5 @@ Information about the API server and how to use it can be found in its [README f
 ## Frontend
 
 Implementation of the frontend.
-you can edit the server address in frontend/.enc -> [REACT_APP_BACKEND]
+you can edit the server address in frontend/.env -> [REACT_APP_BACKEND]
 
