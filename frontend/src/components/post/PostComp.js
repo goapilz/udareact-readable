@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
 import CommentComp from '../comment/CommentComp'
-import {voteForPost, reloadCommentsForPost, addCommentForPost} from '../../actions/index'
+import {voteForPost, reloadCommentsForPost, addCommentForPost, deletePost} from '../../actions/index'
 import {VOTE_UP, VOTE_DOWN, SORTING_TYPE_DATE} from '../../util/Constants'
 import {connect} from 'react-redux'
 import sortBy from 'sort-by'
@@ -27,17 +27,18 @@ class PostComp extends React.Component {
         reloadCommentsForPost(post.id)
     }
 
-    votePost = (post, option) => {
+    votePostAction = (post, option) => {
         const {voteForPost} = this.props
         voteForPost(post.id, option)
     }
 
-    editPost = (post) => {
+    editPostAction = (post) => {
         alert(`edit post ${post.id}`)
     }
 
-    deletePost = (post) => {
-        alert(`delete post ${post.id}`)
+    deletePostAction = (post) => {
+        const {deletePost} = this.props
+        deletePost(post.id)
     }
 
     handleEditCommentChange(field, event) {
@@ -63,18 +64,18 @@ class PostComp extends React.Component {
                 <div className="flex-style">
                     <textarea className='content-text' defaultValue={post.body} disabled={true}/>
                     <button className='btn-edit' onClick={() => {
-                        this.editPost(post)
+                        this.editPostAction(post)
                     }}/>
                     <button className='btn-delete' onClick={() => {
-                        this.deletePost(post)
+                        this.deletePostAction(post)
                     }}/>
                 </div>
                 <div className='flex-style'>
                     <button className='btn-vote-up' onClick={() => {
-                        this.votePost(post, VOTE_UP)
+                        this.votePostAction(post, VOTE_UP)
                     }}/>
                     <button className='btn-vote-down' onClick={() => {
-                        this.votePost(post, VOTE_DOWN)
+                        this.votePostAction(post, VOTE_DOWN)
                     }}/>
                     <div className='meta-infos'>Score {post.voteScore}</div>
                 </div>
@@ -113,7 +114,8 @@ function mapDispatchToProps(dispatch) {
     return {
         voteForPost: (postId, option) => dispatch(voteForPost(postId, option)),
         reloadCommentsForPost: (postId) => dispatch(reloadCommentsForPost(postId)),
-        addCommentForPost: (postId, author, body) => dispatch(addCommentForPost(postId, author, body))
+        addCommentForPost: (postId, author, body) => dispatch(addCommentForPost(postId, author, body)),
+        deletePost: (postId) => dispatch(deletePost(postId))
     }
 }
 
