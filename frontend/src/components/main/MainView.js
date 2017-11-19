@@ -17,7 +17,7 @@ class MainView extends React.Component {
         reloadPosts()
     }
 
-    render () {
+    render() {
         const {categories, posts} = this.props
 
         return (

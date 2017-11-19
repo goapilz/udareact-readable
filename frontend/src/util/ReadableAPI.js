@@ -148,4 +148,3 @@ export const editComment = (commentId, author, body) =>
     }).then((data) => {
         return data
     })
-

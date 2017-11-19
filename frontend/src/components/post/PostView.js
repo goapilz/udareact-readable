@@ -35,7 +35,7 @@ class PostView extends React.Component {
                 <Link className='back-link'
                       to={category ? `/category/${post.category}` : '/'}>Back
                     to {category ? category.name : 'Overview'}</Link>
-                {post ? (<PostComp post={post}/>):(<div className='back-link'>deleted</div>)}
+                {post ? (<PostComp post={post}/>) : (<div className='back-link'>deleted</div>)}
             </div>
         )
     }
@@ -45,7 +45,7 @@ function mapStateToProps({categories, posts}) {
     // called before componentDidMount is called - no access to match props
     return {
         categories,
-        posts // only extract post of id ? (not possible her because it is not possible to access the postId)
+        posts // only extract post of id ? (not possible here because i cannot access the postId from props.match)
     }
 }
 
