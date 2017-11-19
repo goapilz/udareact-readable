@@ -122,7 +122,7 @@ class CategoryComp extends React.Component {
                                 <button className='btn-delete' onClick={() => {
                                     this.deletePostAction(post)
                                 }}/>
-                                <Link to={`/post/${post.id}`}>{post.title}</Link>
+                                <Link to={`/${post.category}/${post.id}`}>{post.title}</Link>
                             </div>
                             <div className='flex-style'>
                                 <button className='btn-vote-up' onClick={() => {
