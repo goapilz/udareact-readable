@@ -79,6 +79,20 @@ export const voteForComment = (commentId, option) =>
         return data
     })
 
+export const addComment = (postId, author, body) =>
+    fetch(`${APP_BACKEND}/comments/`, {
+        method: 'POST', headers, body: JSON.stringify({
+            parentId: postId,
+            author: author,
+            body: body
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
+
+
 export const addPost = (categoryId, postId) => {
     // categoryId needed ?
     // if this method will return the new post the id can be generated
@@ -94,10 +108,6 @@ export const deletePost = (postId) => {
 }
 
 
-export const addComment = (postId, commentId) => {
-    // postId is needed to fill the parentId
-    // if this method will return the new comment the id can be generated
-}
 export const updateComment = (commentObject) => {
     // this method should return the updated comment
     // can also be used for voting

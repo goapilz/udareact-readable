@@ -44,7 +44,7 @@ class DialogComp extends React.Component {
                     <button
                         className='btn-close'
                         onClick={this.closeDialog}/>
-                    {children}
+                    <div>{children}</div>
                     <button onClick={() => {
                         submitFunction()
                         this.closeDialog()

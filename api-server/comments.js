@@ -1,5 +1,6 @@
 const clone = require('clone')
 const posts = require('./posts')
+const uuidv1 = require('uuid/v1');
 
 let db = {}
 
@@ -68,9 +69,12 @@ function add(token, comment) {
     return new Promise((res) => {
         let comments = getData(token)
 
+        const commentId = uuidv1()
+        const timestamp = Date.now()
+
         comments[comment.id] = {
-            id: comment.id,
-            timestamp: comment.timestamp,
+            id: commentId,
+            timestamp: timestamp,
             body: comment.body,
             author: comment.author,
             parentId: comment.parentId,

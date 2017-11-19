@@ -105,3 +105,11 @@ export const voteForComment = (commentId, option) => dispatch => (
         dispatch(updateComment({comment: data}))
     })
 )
+
+export const addCommentForPost = (postId, author, body) => dispatch => (
+    ReadableAPI.addComment(postId, author, body).then((data) => {
+        if (data) {
+            dispatch(updateComment({comment: data}))
+        }
+    })
+)

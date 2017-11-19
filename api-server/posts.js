@@ -34,7 +34,7 @@ const defaultData = {
         category: 'redux',
         voteScore: 4,
         deleted: false,
-        commentCount: 1
+        commentCount: 0
     },
     "6ni6ok3ym7mf1p33lneb": {
         id: '6ni6ok3ym7mf1p33lneb',
@@ -45,7 +45,7 @@ const defaultData = {
         category: 'redux',
         voteScore: 3,
         deleted: false,
-        commentCount: 0
+        commentCount: 1
     },
     "6ni6ok3ym7mf1p33lnec": {
         id: '6ni6ok3ym7mf1p33lnec',
