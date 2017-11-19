@@ -38,14 +38,15 @@ class CommentComp extends React.Component {
                         this.deleteComment(comment)
                     }}/>
                 </div>
-                <div className='meta-infos'>
+                <div className='flex-style'>
                     <button className='btn-vote-up' onClick={() => {
                         this.voteComment(comment, VOTE_UP)
                     }}/>
                     <button className='btn-vote-down' onClick={() => {
                         this.voteComment(comment, VOTE_DOWN)
                     }}/>
-                    Score {comment.voteScore}</div>
+                    <div className='meta-infos'>Score {comment.voteScore}</div>
+                </div>
                 <div className='meta-infos'>
                     Author: {comment.author} / Date: <Time value={comment.timestamp} format='DD.MM.YYYY (HH:mm)'/>
                 </div>

@@ -3,7 +3,13 @@ import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
 import {voteForPost} from '../../actions/index'
-import {SORTING_TYPE_SCORE, SORTING_TYPE_DATE, SORTING_TYPE_COMMENT_COUNT, VOTE_UP, VOTE_DOWN} from '../../util/Constants'
+import {
+    SORTING_TYPE_SCORE,
+    SORTING_TYPE_DATE,
+    SORTING_TYPE_COMMENT_COUNT,
+    VOTE_UP,
+    VOTE_DOWN
+} from '../../util/Constants'
 import {connect} from 'react-redux'
 import Time from 'react-time'
 import DialogComp from '../dialog/DialogComp'
@@ -50,9 +56,12 @@ class CategoryComp extends React.Component {
                         to={`/category/${category ? category.path : ''}`}>{category ? category.name : ''}</Link>
                     <DialogComp className='btn-add'>
                         new post for category: {category.path}
-                        <div className='meta-infos'>Author:</div><input value='author'/>
-                        <div className='meta-infos'>Title:</div><input value='title'/>
-                        <div className='meta-infos'>Content:</div><textarea className='content-text' defaultValue='body'/>
+                        <div className='meta-infos'>Author:</div>
+                        <input value='author'/>
+                        <div className='meta-infos'>Title:</div>
+                        <input value='title'/>
+                        <div className='meta-infos'>Content:</div>
+                        <textarea className='content-text' defaultValue='body'/>
                     </DialogComp>
                     <div className='sorting'>Sorting:
                         <button className='' onClick={() => {
@@ -72,25 +81,27 @@ class CategoryComp extends React.Component {
                 <div>
                     {sortedPosts.map((post) => (
                         <div key={post.id}>
-                            <button className='btn-edit' onClick={() => {
-                                this.editPost(post)
-                            }}/>
-                            <button className='btn-delete' onClick={() => {
-                                this.deletePost(post)
-                            }}/>
-                            <Link to={`/post/${post.id}`}>{post.title}</Link>
-
-                            <div className='meta-infos'>
+                            <div className="flex-style">
+                                <button className='btn-edit' onClick={() => {
+                                    this.editPost(post)
+                                }}/>
+                                <button className='btn-delete' onClick={() => {
+                                    this.deletePost(post)
+                                }}/>
+                                <Link to={`/post/${post.id}`}>{post.title}</Link>
+                            </div>
+                            <div className='flex-style'>
                                 <button className='btn-vote-up' onClick={() => {
                                     this.votePost(post, VOTE_UP)
                                 }}/>
                                 <button className='btn-vote-down' onClick={() => {
                                     this.votePost(post, VOTE_DOWN)
                                 }}/>
-                                Score {post.voteScore}</div>
+                                <div className='meta-infos'>Score {post.voteScore}</div>
+                            </div>
                             <div className='meta-infos'>
                                 Author: {post.author} / Date: <Time value={post.timestamp}
-                                                                    format='DD.MM.YYYY'/> / {post.commentCount} comments
+                                                                    format='DD.MM.YYYY (HH:mm)'/> / {post.commentCount} comments
                             </div>
                             <div className='meta-infos'/>
                         </div>

@@ -41,7 +41,7 @@
 .meta-infos {
     position: relative;
     top: 4px;
-    height: 24px;
+    height: 22px;
     font-size: small;
     font-weight: bold;
 }
@@ -97,21 +97,17 @@
 }
 
 .btn-edit {
-    bottom: 5px;
     background-image: url('../icons/edit.svg');
 }
 
 .btn-delete {
-    bottom: 5px;
     background-image: url('../icons/delete.svg');
 }
 
 .btn-vote-up {
-    bottom: 6px;
     background-image: url('../icons/starup.svg');
 }
 
 .btn-vote-down {
-    bottom: 6px;
     background-image: url('../icons/stardown.svg');
 }

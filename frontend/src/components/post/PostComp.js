@@ -53,17 +53,18 @@ class PostComp extends React.Component {
                         this.deletePost(post)
                     }}/>
                 </div>
-                <div className='meta-infos'>
+                <div className='flex-style'>
                     <button className='btn-vote-up' onClick={() => {
                         this.votePost(post, VOTE_UP)
                     }}/>
                     <button className='btn-vote-down' onClick={() => {
                         this.votePost(post, VOTE_DOWN)
                     }}/>
-                    Score {post.voteScore}</div>
+                    <div className='meta-infos'>Score {post.voteScore}</div>
+                </div>
                 <div className='meta-infos'>
                     Author: {post.author} / Date: <Time value={post.timestamp}
-                                                        format='DD.MM.YYYY'/> / {post.commentCount} comments
+                                                        format='DD.MM.YYYY (HH:mm)'/> / {post.commentCount} comments
                 </div>
                 <div className='post-header'></div>
                 <div className='flex-style'>
