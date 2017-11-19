@@ -125,6 +125,8 @@ export const addCommentForPost = (postId, author, body) => dispatch => (
     ReadableAPI.addComment(postId, author, body).then((data) => {
         if (data) {
             dispatch(updateComment({comment: data}))
+            // reload post for comment count
+            dispatch(reloadPost(data.parentId))
         }
     })
 )
@@ -141,6 +143,7 @@ export const deleteComment = (commentId) => dispatch => (
     ReadableAPI.deleteComment(commentId).then((data) => {
         if (data) {
             dispatch(removeComment({commentId: commentId}))
+            // reload post for comment count
             dispatch(reloadPost(data.parentId))
         }
     })
