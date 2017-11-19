@@ -25,7 +25,7 @@ class DialogComp extends React.Component {
         const {dialogOpen} = this.state
         const {children, text, className} = this.props
         return (
-            <div className='minimal'>
+            <div className='dialog-button'>
                 <button
                     className={className}
                     onClick={() => {

@@ -1,8 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
-import {reloadPost} from '../actions/index'
-import PostComp from '../components/PostComp'
+import {reloadPost} from '../../actions/index'
+import PostComp from './PostComp'
 
 class PostView extends React.Component {
 

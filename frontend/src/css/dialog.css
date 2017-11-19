@@ -14,7 +14,7 @@
     font-size: 0;
 }
 
-.minimal {
+.dialog-button {
     position: relative;
     display: flex;
 }

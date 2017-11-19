@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import '../css/app.css'
-import CategoryView from '../views/CategoryView'
-import MainView from '../views/MainView'
-import PostView from '../views/PostView'
+import CategoryView from './category/CategoryView'
+import MainView from './main/MainView'
+import PostView from './post/PostView'
 import {Route, withRouter} from 'react-router-dom'
 
 class App extends Component {

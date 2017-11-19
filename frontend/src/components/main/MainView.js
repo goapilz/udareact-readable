@@ -1,7 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {reloadCategories, reloadPosts} from '../actions/index'
-import CategoryComp from '../components/CategoryComp'
+import {reloadCategories, reloadPosts} from '../../actions/index'
+import CategoryComp from '../category/CategoryComp'
 
 class MainView extends React.Component {
 
