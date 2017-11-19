@@ -6,7 +6,7 @@ import {voteForPost} from '../actions'
 import {SORTING_TYPE_SCORE, SORTING_TYPE_DATE, SORTING_TYPE_COMMENT_COUNT, VOTE_UP, VOTE_DOWN} from '../util/Constants'
 import {connect} from 'react-redux'
 import Time from 'react-time'
-import DialogComp from './DialogComp'
+import DialogComp from './dialog/DialogComp'
 
 class CategoryComp extends React.Component {
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
-import '../css/dialog.css'
+import '../../css/dialog.css'
 import PropTypes from 'prop-types'
 
 class DialogComp extends React.Component {

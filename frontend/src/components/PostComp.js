@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
 import CommentComp from './CommentComp'
-import {voteForPost, reloadCommentsForPost} from '../actions'
+import {voteForPost, reloadCommentsForPost} from '../actions/index'
 import {VOTE_UP, VOTE_DOWN, SORTING_TYPE_DATE} from '../util/Constants'
 import {connect} from 'react-redux'
 import sortBy from 'sort-by'
-import DialogComp from './DialogComp'
+import DialogComp from './dialog/DialogComp'
 
 class PostComp extends React.Component {
 
