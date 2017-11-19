@@ -29,13 +29,15 @@ class CommentComp extends React.Component {
 
         return (
             <div>
-                <textarea className='content-text' defaultValue={comment.body}/>
-                <button className='btn-edit' onClick={() => {
-                    this.editComment(comment)
-                }}/>
-                <button className='btn-delete' onClick={() => {
-                    this.deleteComment(comment)
-                }}/>
+                <div className="flex-style">
+                    <textarea className='content-text' defaultValue={comment.body}/>
+                    <button className='btn-edit' onClick={() => {
+                        this.editComment(comment)
+                    }}/>
+                    <button className='btn-delete' onClick={() => {
+                        this.deleteComment(comment)
+                    }}/>
+                </div>
                 <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
                         this.voteComment(comment, VOTE_UP)

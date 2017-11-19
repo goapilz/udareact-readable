@@ -97,12 +97,12 @@
 }
 
 .btn-edit {
-    bottom: 6px;
+    bottom: 5px;
     background-image: url('../icons/edit.svg');
 }
 
 .btn-delete {
-    bottom: 6px;
+    bottom: 5px;
     background-image: url('../icons/delete.svg');
 }
 

@@ -44,13 +44,15 @@ class PostComp extends React.Component {
         return (
             <div>
                 <div className='post-header'>{post.title}</div>
-                <textarea className='content-text' defaultValue={post.body}/>
-                <button className='btn-edit' onClick={() => {
-                    this.editPost(post)
-                }}/>
-                <button className='btn-delete' onClick={() => {
-                    this.deletePost(post)
-                }}/>
+                <div className="flex-style">
+                    <textarea className='content-text' defaultValue={post.body}/>
+                    <button className='btn-edit' onClick={() => {
+                        this.editPost(post)
+                    }}/>
+                    <button className='btn-delete' onClick={() => {
+                        this.deletePost(post)
+                    }}/>
+                </div>
                 <div className='meta-infos'>
                     <button className='btn-vote-up' onClick={() => {
                         this.votePost(post, VOTE_UP)
