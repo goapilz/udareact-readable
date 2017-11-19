@@ -21,14 +21,14 @@ class CommentComp extends React.Component {
         this.setState({[field]: event.target.value});
     }
 
-    voteCommentAction = (comment, option) => {
+    voteCommentAction(commentId, option) {
         const {voteForComment} = this.props
-        voteForComment(comment.id, option)
+        voteForComment(commentId, option)
     }
 
-    deleteCommentAction = (comment) => {
+    deleteCommentAction(commentId) {
         const {deleteComment} = this.props
-        deleteComment(comment.id)
+        deleteComment(commentId)
     }
 
     editCommentAction(commentId) {
@@ -62,15 +62,15 @@ class CommentComp extends React.Component {
                                   onChange={event => this.handleFieldChange('editCommentBody', event)}/>
                     </DialogComp>
                     <button className='btn-delete' onClick={() => {
-                        this.deleteCommentAction(comment)
+                        this.deleteCommentAction(comment.id)
                     }}/>
                 </div>
                 <div className='flex-style'>
                     <button className='btn-vote-up' onClick={() => {
-                        this.voteCommentAction(comment, VOTE_UP)
+                        this.voteCommentAction(comment.id, VOTE_UP)
                     }}/>
                     <button className='btn-vote-down' onClick={() => {
-                        this.voteCommentAction(comment, VOTE_DOWN)
+                        this.voteCommentAction(comment.id, VOTE_DOWN)
                     }}/>
                     <div className='meta-infos'>Score {comment.voteScore}</div>
                 </div>

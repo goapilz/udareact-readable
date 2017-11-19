@@ -34,14 +34,14 @@ class PostComp extends React.Component {
         this.setState({[field]: event.target.value});
     }
 
-    votePostAction = (post, option) => {
+    votePostAction(postId, option) {
         const {voteForPost} = this.props
-        voteForPost(post.id, option)
+        voteForPost(postId, option)
     }
 
-    deletePostAction = (post) => {
+    deletePostAction(postId) {
         const {deletePost} = this.props
-        deletePost(post.id)
+        deletePost(postId)
     }
 
     editPostAction(postId) {
@@ -54,11 +54,10 @@ class PostComp extends React.Component {
         this.setState({editPostAuthor: post.author, editPostTitle: post.title, editPostBody: post.body})
     }
 
-    addCommentAction() {
+    addCommentAction(postId) {
         const {addCommentForPost} = this.props
-        const {post} = this.props
         const {editCommentAuthor, editCommentBody} = this.state
-        addCommentForPost(post.id, editCommentAuthor, editCommentBody)
+        addCommentForPost(postId, editCommentAuthor, editCommentBody)
     }
 
     render() {
@@ -89,15 +88,15 @@ class PostComp extends React.Component {
                                   onChange={event => this.handleFieldChange('editPostBody', event)}/>
                     </DialogComp>
                     <button className='btn-delete' onClick={() => {
-                        this.deletePostAction(post)
+                        this.deletePostAction(post.id)
                     }}/>
                 </div>
                 <div className='flex-style'>
                     <button className='btn-vote-up' onClick={() => {
-                        this.votePostAction(post, VOTE_UP)
+                        this.votePostAction(post.id, VOTE_UP)
                     }}/>
                     <button className='btn-vote-down' onClick={() => {
-                        this.votePostAction(post, VOTE_DOWN)
+                        this.votePostAction(post.id, VOTE_DOWN)
                     }}/>
                     <div className='meta-infos'>Score {post.voteScore}</div>
                 </div>
@@ -109,7 +108,7 @@ class PostComp extends React.Component {
                 <div className='flex-style'>
                     <div className='post-header'>Comments</div>
                     <DialogComp className='btn-add' submitFunction={() => {
-                        this.addCommentAction()
+                        this.addCommentAction(post.id)
                     }} submitText='add comment'>
                         <div className='category-header'>Add comment for post {post.title}</div>
                         <div className='meta-infos'>Author:</div>
