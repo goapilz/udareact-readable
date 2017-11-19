@@ -5,10 +5,12 @@ export const SET_CATEGORIES = 'SET_CATEGORIES'
 export const SET_POSTS = 'SET_POSTS'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_POSTS = 'UPDATE_POSTS'
+export const REMOVE_POST = 'REMOVE_POST'
 
 export const SET_COMMENTS = 'SET_COMMENTS'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const UPDATE_COMMENTS = 'UPDATE_COMMENTS'
+export const REMOVE_COMMENT = 'REMOVE_COMMENT'
 
 export function setCategories({categories}) {
     return {
@@ -38,6 +40,13 @@ export function updatePosts({posts}) {
     }
 }
 
+export function removePost({postId}) {
+    return {
+        type: REMOVE_POST,
+        postId
+    }
+}
+
 
 export function setComments({comments}) {
     return {
@@ -57,6 +66,13 @@ export function updateComments({comments}) {
     return {
         type: UPDATE_COMMENTS,
         comments
+    }
+}
+
+export function removeComment({commentId}) {
+    return {
+        type: REMOVE_COMMENT,
+        commentId
     }
 }
 
@@ -110,6 +126,7 @@ export const addCommentForPost = (postId, author, body) => dispatch => (
     ReadableAPI.addComment(postId, author, body).then((data) => {
         if (data) {
             dispatch(updateComment({comment: data}))
+            dispatch(reloadPost(data.parentId))
         }
     })
 )
@@ -118,6 +135,23 @@ export const addPostForCategory = (categoryId, author, title, body) => dispatch 
     ReadableAPI.addPost(categoryId, author, title, body).then((data) => {
         if (data) {
             dispatch(updatePost({post: data}))
+        }
+    })
+)
+
+export const deletePost = (postId) => dispatch => (
+    ReadableAPI.deletePost(postId).then((data) => {
+        if (data) {
+            dispatch(removePost({postId: postId}))
+        }
+    })
+)
+
+export const deleteComment = (commentId) => dispatch => (
+    ReadableAPI.deleteComment(commentId).then((data) => {
+        if (data) {
+            dispatch(removeComment({commentId: commentId}))
+            dispatch(reloadPost(data.parentId))
         }
     })
 )

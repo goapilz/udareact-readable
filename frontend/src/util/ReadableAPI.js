@@ -79,20 +79,6 @@ export const voteForComment = (commentId, option) =>
         return data
     })
 
-export const addComment = (postId, author, body) =>
-    fetch(`${APP_BACKEND}/comments/`, {
-        method: 'POST', headers, body: JSON.stringify({
-            parentId: postId,
-            author: author,
-            body: body
-        })
-    }).then((res) => {
-        return res.json()
-    }).then((data) => {
-        return data
-    })
-
-
 export const addPost = (categoryId, author, title, body) =>
     fetch(`${APP_BACKEND}/posts/`, {
         method: 'POST', headers, body: JSON.stringify({
@@ -107,20 +93,36 @@ export const addPost = (categoryId, author, title, body) =>
         return data
     })
 
-export const updatePost = (postObject) => {
-    // this method should return the updated post
-    // can also be used for voting
-}
+export const addComment = (postId, author, body) =>
+    fetch(`${APP_BACKEND}/comments/`, {
+        method: 'POST', headers, body: JSON.stringify({
+            parentId: postId,
+            author: author,
+            body: body
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
 
-export const deletePost = (postId) => {
-    // should delete the post an all comments
-}
+export const deletePost = (postId) =>
+    fetch(`${APP_BACKEND}/posts/${postId}`, {
+        method: 'DELETE', headers
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
+
+export const deleteComment = (commentId) =>
+    fetch(`${APP_BACKEND}/comments/${commentId}`, {
+        method: 'DELETE', headers
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
 
 
-export const updateComment = (commentObject) => {
-    // this method should return the updated comment
-    // can also be used for voting
-}
-export const deleteComment = (commentId) => {
-    // should delete the comment
-}
+

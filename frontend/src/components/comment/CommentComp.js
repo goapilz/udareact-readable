@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
-import {voteForComment} from '../../actions/index'
+import {voteForComment,deleteComment} from '../../actions/index'
 import {VOTE_UP, VOTE_DOWN} from '../../util/Constants'
 import {connect} from 'react-redux'
 
@@ -11,17 +11,18 @@ class CommentComp extends React.Component {
         comment: PropTypes.object.isRequired
     }
 
-    voteComment = (comment, option) => {
+    voteCommentAction = (comment, option) => {
         const {voteForComment} = this.props
         voteForComment(comment.id, option)
     }
 
-    editComment = (comment) => {
+    editCommentAction = (comment) => {
         alert(`edit comment ${comment.id}`)
     }
 
-    deleteComment = (comment) => {
-        alert(`delete comment ${comment.id}`)
+    deleteCommentAction = (comment) => {
+        const {deleteComment} = this.props
+        deleteComment(comment.id)
     }
 
     render() {
@@ -32,18 +33,18 @@ class CommentComp extends React.Component {
                 <div className="flex-style">
                     <textarea className='content-text' defaultValue={comment.body} disabled={true}/>
                     <button className='btn-edit' onClick={() => {
-                        this.editComment(comment)
+                        this.editCommentAction(comment)
                     }}/>
                     <button className='btn-delete' onClick={() => {
-                        this.deleteComment(comment)
+                        this.deleteCommentAction(comment)
                     }}/>
                 </div>
                 <div className='flex-style'>
                     <button className='btn-vote-up' onClick={() => {
-                        this.voteComment(comment, VOTE_UP)
+                        this.voteCommentAction(comment, VOTE_UP)
                     }}/>
                     <button className='btn-vote-down' onClick={() => {
-                        this.voteComment(comment, VOTE_DOWN)
+                        this.voteCommentAction(comment, VOTE_DOWN)
                     }}/>
                     <div className='meta-infos'>Score {comment.voteScore}</div>
                 </div>
@@ -62,7 +63,8 @@ function mapStateToProps() {
 
 function mapDispatchToProps(dispatch) {
     return {
-        voteForComment: (commentId, option) => dispatch(voteForComment(commentId, option))
+        voteForComment: (commentId, option) => dispatch(voteForComment(commentId, option)),
+        deleteComment: (commentId) => dispatch(deleteComment(commentId))
     }
 }
 

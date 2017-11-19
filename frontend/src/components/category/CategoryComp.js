@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import sortBy from 'sort-by'
 import {Link} from 'react-router-dom'
-import {voteForPost, addPostForCategory} from '../../actions/index'
+import {voteForPost, addPostForCategory, deletePost} from '../../actions/index'
 import {
     SORTING_TYPE_SCORE,
     SORTING_TYPE_DATE,
@@ -32,24 +32,25 @@ class CategoryComp extends React.Component {
         this.setState({sortingType})
     }
 
-    votePost = (post, option) => {
+    votePostAction = (post, option) => {
         const {voteForPost} = this.props
         voteForPost(post.id, option)
     }
 
-    editPost = (post) => {
+    editPostAction = (post) => {
         alert(`edit post ${post.id}`)
     }
 
-    deletePost = (post) => {
-        alert(`delete post ${post.id}`)
+    deletePostAction = (post) => {
+        const {deletePost} = this.props
+        deletePost(post.id)
     }
 
     handleEditPostChange(field, event) {
         this.setState({[field]: event.target.value});
     }
 
-    handleEditPostSubmit() {
+    addPostAction() {
         const {addPostForCategory} = this.props
         const {category} = this.props
         const {editPostAuthor, editPostTitle, editPostBody} = this.state
@@ -69,9 +70,9 @@ class CategoryComp extends React.Component {
                     <Link
                         to={`/category/${category ? category.path : ''}`}>{category ? category.name : ''}</Link>
                     <DialogComp className='btn-add' submitFunction={() => {
-                        this.handleEditPostSubmit()
+                        this.addPostAction()
                     }} submitText='commit comment'>
-                        Add post for category {category.name}
+                        <div className='category-header'>Add post for category {category.name}</div>
                         <div className='meta-infos'>Author:</div>
                         <input value={this.state.editPostAuthor}
                                onChange={event => this.handleEditPostChange('editPostAuthor', event)}/>
@@ -102,19 +103,19 @@ class CategoryComp extends React.Component {
                         <div key={post.id}>
                             <div className="flex-style">
                                 <button className='btn-edit' onClick={() => {
-                                    this.editPost(post)
+                                    this.editPostAction(post)
                                 }}/>
                                 <button className='btn-delete' onClick={() => {
-                                    this.deletePost(post)
+                                    this.deletePostAction(post)
                                 }}/>
                                 <Link to={`/post/${post.id}`}>{post.title}</Link>
                             </div>
                             <div className='flex-style'>
                                 <button className='btn-vote-up' onClick={() => {
-                                    this.votePost(post, VOTE_UP)
+                                    this.votePostAction(post, VOTE_UP)
                                 }}/>
                                 <button className='btn-vote-down' onClick={() => {
-                                    this.votePost(post, VOTE_DOWN)
+                                    this.votePostAction(post, VOTE_DOWN)
                                 }}/>
                                 <div className='meta-infos'>Score {post.voteScore}</div>
                             </div>
@@ -138,7 +139,8 @@ function mapStateToProps() {
 function mapDispatchToProps(dispatch) {
     return {
         voteForPost: (postId, option) => dispatch(voteForPost(postId, option)),
-        addPostForCategory: (categoryId, author, title, body) => dispatch(addPostForCategory(categoryId, author, title, body))
+        addPostForCategory: (categoryId, author, title, body) => dispatch(addPostForCategory(categoryId, author, title, body)),
+        deletePost: (postId) => dispatch(deletePost(postId))
     }
 }
 
