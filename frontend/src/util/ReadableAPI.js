@@ -137,10 +137,10 @@ export const editPost = (postId, author, title, body) =>
         return data
     })
 
-export const editComment = (commentId, title, body) =>
+export const editComment = (commentId, author, body) =>
     fetch(`${APP_BACKEND}/comments/${commentId}`, {
         method: 'PUT', headers, body: JSON.stringify({
-            title: title,
+            author: author,
             body: body
         })
     }).then((res) => {

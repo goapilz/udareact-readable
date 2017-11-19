@@ -47,7 +47,7 @@ class CommentComp extends React.Component {
         return (
             <div>
                 <div className="flex-style">
-                    <textarea className='content-text' defaultValue={comment.body} disabled={true}/>
+                    <textarea className='content-text' value={comment.body} disabled={true}/>
                     <DialogComp className='btn-edit' submitFunction={() => {
                         this.editCommentAction(comment.id)
                     }} submitText='update comment' initFunction={() => {
@@ -57,7 +57,7 @@ class CommentComp extends React.Component {
                         <div className='meta-infos'>Author:</div>
                         <input value={this.state.editCommentAuthor}
                                onChange={event => this.handleFieldChange('editCommentAuthor', event)}/>
-                        <div className='meta-infos'>Content:</div>
+                        <div className='meta-infos'>Comment:</div>
                         <textarea className='content-text' value={this.state.editCommentBody}
                                   onChange={event => this.handleFieldChange('editCommentBody', event)}/>
                     </DialogComp>
@@ -91,7 +91,7 @@ function mapDispatchToProps(dispatch) {
     return {
         voteForComment: (commentId, option) => dispatch(voteForComment(commentId, option)),
         deleteComment: (commentId) => dispatch(deleteComment(commentId)),
-        editComment: (postId, author, body) => dispatch(editComment(postId, author, body))
+        editComment: (commentId, author, body) => dispatch(editComment(commentId, author, body))
     }
 }
 

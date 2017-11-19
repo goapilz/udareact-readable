@@ -134,7 +134,6 @@ export const addCommentForPost = (postId, author, body) => dispatch => (
     ReadableAPI.addComment(postId, author, body).then((data) => {
         if (data) {
             dispatch(updateComment({comment: data}))
-            dispatch(reloadPost(data.parentId))
         }
     })
 )

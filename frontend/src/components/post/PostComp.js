@@ -71,7 +71,7 @@ class PostComp extends React.Component {
             <div>
                 <div className='post-header'>{post.title}</div>
                 <div className="flex-style">
-                    <textarea className='content-text' defaultValue={post.body} disabled={true}/>
+                    <textarea className='content-text' value={post.body} disabled={true}/>
                     <DialogComp className='btn-edit' submitFunction={() => {
                         this.editPostAction(post.id)
                     }} submitText='update post' initFunction={() => {
@@ -84,7 +84,7 @@ class PostComp extends React.Component {
                         <div className='meta-infos'>Title:</div>
                         <input value={this.state.editPostTitle}
                                onChange={event => this.handleFieldChange('editPostTitle', event)}/>
-                        <div className='meta-infos'>Content:</div>
+                        <div className='meta-infos'>Message:</div>
                         <textarea className='content-text' value={this.state.editPostBody}
                                   onChange={event => this.handleFieldChange('editPostBody', event)}/>
                     </DialogComp>
@@ -115,7 +115,7 @@ class PostComp extends React.Component {
                         <div className='meta-infos'>Author:</div>
                         <input value={this.state.editCommentAuthor}
                                onChange={event => this.handleFieldChange('editCommentAuthor', event)}/>
-                        <div className='meta-infos'>Content:</div>
+                        <div className='meta-infos'>Comment:</div>
                         <textarea className='content-text' value={this.state.editCommentBody}
                                   onChange={event => this.handleFieldChange('editCommentBody', event)}/>
                     </DialogComp>
