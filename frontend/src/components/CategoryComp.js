@@ -6,6 +6,7 @@ import {voteForPost} from '../actions'
 import {SORTING_TYPE_SCORE, SORTING_TYPE_DATE, SORTING_TYPE_COMMENT_COUNT, VOTE_UP, VOTE_DOWN} from '../util/Constants'
 import {connect} from 'react-redux'
 import Time from 'react-time'
+import DialogComp from './DialogComp'
 
 class CategoryComp extends React.Component {
 
@@ -18,8 +19,6 @@ class CategoryComp extends React.Component {
         sortingType: SORTING_TYPE_SCORE
     }
 
-
-
     sort = (sortingType) => {
         this.setState({sortingType})
     }
@@ -27,10 +26,6 @@ class CategoryComp extends React.Component {
     votePost = (post, option) => {
         const {voteForPost} = this.props
         voteForPost(post.id, option)
-    }
-
-    addPost = (category) => {
-        alert(`add post for ${category.name}`)
     }
 
     editPost = (post) => {
@@ -46,16 +41,19 @@ class CategoryComp extends React.Component {
         const {sortingType} = this.state
 
         const sortedPosts = posts.filter(post => post.category === category.path)
-        sortedPosts.sort(sortBy(sortingType))
+        sortedPosts.sort(sortBy(`-${sortingType}`))
 
         return (
             <div className='category-block'>
                 <div className='category-header'>
                     <Link
                         to={`/category/${category ? category.path : ''}`}>{category ? category.name : ''}</Link>
-                    <button className='btn-add' onClick={() => {
-                        this.addPost(category)
-                    }}/>
+                    <DialogComp className='btn-add'>
+                        new post for category: {category.path}
+                        <div className='meta-infos'>Author:</div><input value='author'/>
+                        <div className='meta-infos'>Title:</div><input value='title'/>
+                        <div className='meta-infos'>Content:</div><textarea className='content-text' defaultValue='body'/>
+                    </DialogComp>
                     <div className='sorting'>Sorting:
                         <button className='' onClick={() => {
                             this.sort(SORTING_TYPE_DATE)
@@ -91,8 +89,8 @@ class CategoryComp extends React.Component {
                                 }}/>
                                 Score {post.voteScore}</div>
                             <div className='meta-infos'>
-                                Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/>
-                                / {post.commentCount} comments
+                                Author: {post.author} / Date: <Time value={post.timestamp}
+                                                                    format='DD.MM.YYYY'/> / {post.commentCount} comments
                             </div>
                             <div className='meta-infos'/>
                         </div>

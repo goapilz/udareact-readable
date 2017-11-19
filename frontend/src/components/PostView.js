@@ -29,7 +29,7 @@ class PostView extends React.Component {
         const category = post && categories.find(value => value.path === post.category)
 
         return (
-            <div>
+            <div className="app-one-column">
                 <Link className='back-link'
                       to={category ? `/category/${post.category}` : '/'}>Back
                     to {category ? category.name : 'Overview'}</Link>

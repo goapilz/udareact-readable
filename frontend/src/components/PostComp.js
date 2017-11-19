@@ -3,9 +3,10 @@ import PropTypes from 'prop-types'
 import Time from 'react-time'
 import CommentComp from './CommentComp'
 import {voteForPost, reloadCommentsForPost} from '../actions'
-import {VOTE_UP, VOTE_DOWN} from '../util/Constants'
+import {VOTE_UP, VOTE_DOWN, SORTING_TYPE_DATE} from '../util/Constants'
 import {connect} from 'react-redux'
 import sortBy from 'sort-by'
+import DialogComp from './DialogComp'
 
 class PostComp extends React.Component {
 
@@ -26,10 +27,6 @@ class PostComp extends React.Component {
         voteForPost(post.id, option)
     }
 
-    addComment = (post) => {
-        alert(`add comment for postId ${post.id}`)
-    }
-
     editPost = (post) => {
         alert(`edit post ${post.id}`)
     }
@@ -42,7 +39,7 @@ class PostComp extends React.Component {
         const {post, comments} = this.props
 
         const sortedComments = comments.filter(comment => comment.parentId === post.id)
-        sortedComments.sort(sortBy('timestamp'))
+        sortedComments.sort(sortBy(`-${SORTING_TYPE_DATE}`))
 
         return (
             <div>
@@ -67,11 +64,18 @@ class PostComp extends React.Component {
                                                         format='DD.MM.YYYY'/> / {post.commentCount} comments
                 </div>
                 <div className='post-header'></div>
-                {sortedComments.length > 0 && (<div className='post-header'>Comments
-                    <button className='btn-add' style={{left: '10px', bottom: '6px'}} onClick={() => {
-                        this.addComment(post)
-                    }}/>
-                </div>)}
+                <div className='flex-style'>
+                    <div className='post-header'>Comments</div>
+                    <DialogComp className='btn-add'>
+                        new comment for post: {post.id}
+                        <div className='meta-infos'>Author:</div>
+                        <input value='author'/>
+                        <div className='meta-infos'>Title:</div>
+                        <input value='title'/>
+                        <div className='meta-infos'>Content:</div>
+                        <textarea className='content-text' defaultValue='body'/>
+                    </DialogComp>
+                </div>
                 {sortedComments.map((comment) => (
                     <CommentComp key={comment.id} comment={comment}/>
                 ))}
