@@ -12,7 +12,6 @@ class PostView extends React.Component {
         // the categoryId is not really needed because it is part of the post
         // const {categoryId} = this.props.match.params
 
-        console.log('wfhwehfuzwehfiuweh')
         if (!this.getPost()) {
             reloadPost(postId)
         }

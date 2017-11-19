@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
 import {voteForComment, deleteComment, editComment} from '../../actions/index'
-import {VOTE_UP, VOTE_DOWN} from '../../util/Constants'
+import {VOTE_UP, VOTE_DOWN} from '../../actions/types'
 import {connect} from 'react-redux'
 import DialogComp from '../dialog/DialogComp'
 

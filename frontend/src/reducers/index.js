@@ -1,8 +1,7 @@
 import {combineReducers} from 'redux';
-import {SET_CATEGORIES, SET_COMMENTS, SET_POSTS, UPDATE_POST, UPDATE_POSTS} from '../actions/types'
-import {REMOVE_POST} from '../actions/types'
-import {UPDATE_COMMENT} from '../actions/types'
-import {REMOVE_COMMENT, UPDATE_COMMENTS} from "../actions/types";
+import {SET_CATEGORIES} from "../actions/types";
+import {SET_POSTS, UPDATE_POST, UPDATE_POSTS, REMOVE_POST} from "../actions/types";
+import {SET_COMMENTS, UPDATE_COMMENT, UPDATE_COMMENTS, REMOVE_COMMENT} from "../actions/types";
 
 const initialCategoriesState = []
 const initialPostsState = []
