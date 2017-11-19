@@ -88,7 +88,7 @@ class PostComp extends React.Component {
                     <div className='post-header'>Comments</div>
                     <DialogComp className='btn-add' submitFunction={() => {
                         this.handleEditCommentSubmit()
-                    }} submitText='commit comment'>
+                    }} submitText='add comment'>
                         <div className='category-header'>Add comment for post {post.title}</div>
                         <div className='meta-infos'>Author:</div>
                         <input value={this.state.editCommentAuthor}

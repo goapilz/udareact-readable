@@ -122,19 +122,19 @@ export const voteForComment = (commentId, option) => dispatch => (
     })
 )
 
+export const addPostForCategory = (categoryId, author, title, body) => dispatch => (
+    ReadableAPI.addPost(categoryId, author, title, body).then((data) => {
+        if (data) {
+            dispatch(updatePost({post: data}))
+        }
+    })
+)
+
 export const addCommentForPost = (postId, author, body) => dispatch => (
     ReadableAPI.addComment(postId, author, body).then((data) => {
         if (data) {
             dispatch(updateComment({comment: data}))
             dispatch(reloadPost(data.parentId))
-        }
-    })
-)
-
-export const addPostForCategory = (categoryId, author, title, body) => dispatch => (
-    ReadableAPI.addPost(categoryId, author, title, body).then((data) => {
-        if (data) {
-            dispatch(updatePost({post: data}))
         }
     })
 )
@@ -153,5 +153,17 @@ export const deleteComment = (commentId) => dispatch => (
             dispatch(removeComment({commentId: commentId}))
             dispatch(reloadPost(data.parentId))
         }
+    })
+)
+
+export const editPost = (postId, author, title, body) => dispatch => (
+    ReadableAPI.editPost(postId, author, title, body).then((data) => {
+        dispatch(updatePost({post: data}))
+    })
+)
+
+export const editComment = (commentId, author, body) => dispatch => (
+    ReadableAPI.editComment(commentId, author, body).then((data) => {
+        dispatch(updateComment({comment: data}))
     })
 )

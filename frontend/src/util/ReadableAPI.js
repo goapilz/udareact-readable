@@ -124,5 +124,28 @@ export const deleteComment = (commentId) =>
         return data
     })
 
+export const editPost = (postId, author, title, body) =>
+    fetch(`${APP_BACKEND}/posts/${postId}`, {
+        method: 'PUT', headers, body: JSON.stringify({
+            author: author,
+            title: title,
+            body: body
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
 
+export const editComment = (commentId, title, body) =>
+    fetch(`${APP_BACKEND}/comments/${commentId}`, {
+        method: 'PUT', headers, body: JSON.stringify({
+            title: title,
+            body: body
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
 

@@ -9,7 +9,8 @@ class DialogComp extends React.Component {
         className: PropTypes.string.isRequired,
         text: PropTypes.string,
         submitText: PropTypes.string.isRequired,
-        submitFunction: PropTypes.func.isRequired
+        submitFunction: PropTypes.func.isRequired,
+        initFunction: PropTypes.func
     }
 
     state = {
@@ -26,12 +27,15 @@ class DialogComp extends React.Component {
 
     render() {
         const {dialogOpen} = this.state
-        const {children, text, className, submitText, submitFunction} = this.props
+        const {children, text, className, submitText, submitFunction, initFunction} = this.props
         return (
             <div className='dialog-button'>
                 <button
                     className={className}
                     onClick={() => {
+                        if (initFunction) {
+                            initFunction()
+                        }
                         this.openDialog()
                     }}>{text}
                 </button>
