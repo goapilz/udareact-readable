@@ -4,6 +4,7 @@ import '../../css/dialog.css'
 import PropTypes from 'prop-types'
 
 class DialogComp extends React.Component {
+
     static propTypes = {
         className: PropTypes.string.isRequired,
         text: PropTypes.string

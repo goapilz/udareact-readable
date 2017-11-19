@@ -30,7 +30,7 @@ class CommentComp extends React.Component {
         return (
             <div>
                 <div className="flex-style">
-                    <textarea className='content-text' defaultValue={comment.body}/>
+                    <textarea className='content-text' defaultValue={comment.body} disabled={true}/>
                     <button className='btn-edit' onClick={() => {
                         this.editComment(comment)
                     }}/>

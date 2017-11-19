@@ -14,6 +14,10 @@ class PostComp extends React.Component {
         post: PropTypes.object.isRequired
     }
 
+    state = {
+        value: 'new body'
+    }
+
     componentDidMount() {
         const {reloadCommentsForPost} = this.props
         const {post} = this.props
@@ -35,6 +39,10 @@ class PostComp extends React.Component {
         alert(`delete post ${post.id}`)
     }
 
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
     render() {
         const {post, comments} = this.props
 
@@ -45,7 +53,7 @@ class PostComp extends React.Component {
             <div>
                 <div className='post-header'>{post.title}</div>
                 <div className="flex-style">
-                    <textarea className='content-text' defaultValue={post.body}/>
+                    <textarea className='content-text' defaultValue={post.body} disabled={true}/>
                     <button className='btn-edit' onClick={() => {
                         this.editPost(post)
                     }}/>
@@ -72,11 +80,11 @@ class PostComp extends React.Component {
                     <DialogComp className='btn-add'>
                         new comment for post: {post.id}
                         <div className='meta-infos'>Author:</div>
-                        <input value='author'/>
+                        <input defaultValue='author'/>
                         <div className='meta-infos'>Title:</div>
-                        <input value='title'/>
+                        <input defaultValue='title'/>
                         <div className='meta-infos'>Content:</div>
-                        <textarea className='content-text' defaultValue='body'/>
+                        <textarea className='content-text' value={this.state.value} onChange={event => this.handleChange(event)}/>
                     </DialogComp>
                 </div>
                 {sortedComments.map((comment) => (
