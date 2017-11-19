@@ -63,8 +63,8 @@ class PostComp extends React.Component {
                     }}/>
                     Score {post.voteScore}</div>
                 <div className='meta-infos'>
-                    Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY'/>
-                    / {post.commentCount} comments
+                    Author: {post.author} / Date: <Time value={post.timestamp}
+                                                        format='DD.MM.YYYY'/> / {post.commentCount} comments
                 </div>
                 <div className='post-header'></div>
                 {sortedComments.length > 0 && (<div className='post-header'>Comments
