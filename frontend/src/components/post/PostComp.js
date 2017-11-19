@@ -15,7 +15,9 @@ class PostComp extends React.Component {
     }
 
     state = {
-        value: 'new body'
+        editCommentAuthor: 'Enter Name',
+        editCommentTitle: 'Enter Title',
+        editCommentBody: 'Enter Body'
     }
 
     componentDidMount() {
@@ -39,8 +41,12 @@ class PostComp extends React.Component {
         alert(`delete post ${post.id}`)
     }
 
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleEditCommentChange(field, event) {
+        this.setState({[field]: event.target.value});
+    }
+
+    handleEditCommentSubmit(instance) {
+        alert(instance.state.editCommentAuthor)
     }
 
     render() {
@@ -77,14 +83,19 @@ class PostComp extends React.Component {
                 <div className='post-header'></div>
                 <div className='flex-style'>
                     <div className='post-header'>Comments</div>
-                    <DialogComp className='btn-add'>
-                        new comment for post: {post.id}
-                        <div className='meta-infos'>Author:</div>
-                        <input defaultValue='author'/>
-                        <div className='meta-infos'>Title:</div>
-                        <input defaultValue='title'/>
-                        <div className='meta-infos'>Content:</div>
-                        <textarea className='content-text' value={this.state.value} onChange={event => this.handleChange(event)}/>
+                    <DialogComp className='btn-add' submitFunction={ () => {this.handleEditCommentSubmit(this)}} submitText='commit comment'>
+                        <div>
+                            new comment for post: {post.id}
+                            <div className='meta-infos'>Author:</div>
+                            <input value={this.state.editCommentAuthor}
+                                   onChange={event => this.handleEditCommentChange('editCommentAuthor', event)}/>
+                            <div className='meta-infos'>Title:</div>
+                            <input value={this.state.editCommentTitle}
+                                   onChange={event => this.handleEditCommentChange('editCommentTitle', event)}/>
+                            <div className='meta-infos'>Content:</div>
+                            <textarea className='content-text' value={this.state.editCommentBody}
+                                      onChange={event => this.handleEditCommentChange('editCommentBody', event)}/>
+                        </div>
                     </DialogComp>
                 </div>
                 {sortedComments.map((comment) => (

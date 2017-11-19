@@ -7,7 +7,9 @@ class DialogComp extends React.Component {
 
     static propTypes = {
         className: PropTypes.string.isRequired,
-        text: PropTypes.string
+        text: PropTypes.string,
+        submitText: PropTypes.string.isRequired,
+        submitFunction: PropTypes.func.isRequired
     }
 
     state = {
@@ -24,7 +26,7 @@ class DialogComp extends React.Component {
 
     render() {
         const {dialogOpen} = this.state
-        const {children, text, className} = this.props
+        const {children, text, className, submitText, submitFunction} = this.props
         return (
             <div className='dialog-button'>
                 <button
@@ -43,6 +45,10 @@ class DialogComp extends React.Component {
                         className='btn-close'
                         onClick={this.closeDialog}/>
                     {children}
+                    <button onClick={() => {
+                        submitFunction()
+                        this.closeDialog()
+                    }}>{submitText}</button>
                 </Modal>
             </div>
         )
