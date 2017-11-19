@@ -79,8 +79,8 @@ class PostComp extends React.Component {
                     <div className='meta-infos'>Score {post.voteScore}</div>
                 </div>
                 <div className='meta-infos'>
-                    Author: {post.author} / Date: <Time value={post.timestamp}
-                                                        format='DD.MM.YYYY (HH:mm)'/> / {post.commentCount} comments
+                    Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY (HH:mm)'/>
+                    &nbsp;/&nbsp;{post.commentCount}&nbsp;comments
                 </div>
                 <div className='post-header'></div>
                 <div className='flex-style'>

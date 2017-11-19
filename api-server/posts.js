@@ -105,7 +105,7 @@ function add(token, post) {
         const postId = uuidv1()
         const timestamp = Date.now()
 
-        posts[post.id] = {
+        posts[postId] = {
             id: postId,
             timestamp: timestamp,
             title: post.title,
@@ -117,7 +117,7 @@ function add(token, post) {
             commentCount: 0
         }
 
-        res(posts[post.id])
+        res(posts[postId])
     })
 }
 

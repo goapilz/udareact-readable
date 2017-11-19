@@ -72,7 +72,7 @@ function add(token, comment) {
         const commentId = uuidv1()
         const timestamp = Date.now()
 
-        comments[comment.id] = {
+        comments[commentId] = {
             id: commentId,
             timestamp: timestamp,
             body: comment.body,
@@ -84,7 +84,7 @@ function add(token, comment) {
         }
 
         posts.incrementCommentCounter(token, comment.parentId, 1)
-        res(comments[comment.id])
+        res(comments[commentId])
     })
 }
 

@@ -82,16 +82,6 @@ class CategoryComp extends React.Component {
                         <textarea className='content-text' value={this.state.editPostBody}
                                   onChange={event => this.handleEditPostChange('editPostBody', event)}/>
                     </DialogComp>
-
-                    <DialogComp className='btn-add'>
-                        new post for category: {category.path}
-                        <div className='meta-infos'>Author:</div>
-                        <input value='author'/>
-                        <div className='meta-infos'>Title:</div>
-                        <input value='title'/>
-                        <div className='meta-infos'>Content:</div>
-                        <textarea className='content-text' defaultValue='body'/>
-                    </DialogComp>
                     <div className='sorting'>Sorting:
                         <button className='' onClick={() => {
                             this.sort(SORTING_TYPE_DATE)
@@ -129,9 +119,8 @@ class CategoryComp extends React.Component {
                                 <div className='meta-infos'>Score {post.voteScore}</div>
                             </div>
                             <div className='meta-infos'>
-                                Author: {post.author} / Date: <Time value={post.timestamp}
-                                                                    format='DD.MM.YYYY (HH:mm)'/> / {post.commentCount}
-                                comments
+                                Author: {post.author} / Date: <Time value={post.timestamp} format='DD.MM.YYYY (HH:mm)'/>
+                                &nbsp;/&nbsp;{post.commentCount}&nbsp;comments
                             </div>
                             <div className='meta-infos'/>
                         </div>
