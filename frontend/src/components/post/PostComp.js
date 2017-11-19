@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Time from 'react-time'
 import CommentComp from '../comment/CommentComp'
-import {voteForPost, reloadCommentsForPost, addCommentForPost, deletePost} from '../../actions/index'
+import {voteForPost, reloadCommentsForPost, addCommentForPost, deletePost, editPost} from '../../actions/index'
 import {VOTE_UP, VOTE_DOWN, SORTING_TYPE_DATE} from '../../util/Constants'
 import {connect} from 'react-redux'
 import sortBy from 'sort-by'
@@ -16,7 +16,10 @@ class PostComp extends React.Component {
 
     state = {
         editCommentAuthor: 'Enter Name',
-        editCommentBody: 'Enter Body'
+        editCommentBody: 'Enter Body',
+        editPostAuthor: 'Enter Name',
+        editPostTitle: 'Enter Title',
+        editPostBody: 'Enter Body'
     }
 
     componentDidMount() {
@@ -27,13 +30,13 @@ class PostComp extends React.Component {
         reloadCommentsForPost(post.id)
     }
 
+    handleFieldChange(field, event) {
+        this.setState({[field]: event.target.value});
+    }
+
     votePostAction = (post, option) => {
         const {voteForPost} = this.props
         voteForPost(post.id, option)
-    }
-
-    editPostAction = (post) => {
-        alert(`edit post ${post.id}`)
     }
 
     deletePostAction = (post) => {
@@ -41,11 +44,17 @@ class PostComp extends React.Component {
         deletePost(post.id)
     }
 
-    handleEditCommentChange(field, event) {
-        this.setState({[field]: event.target.value});
+    editPostAction(postId) {
+        const {editPost} = this.props
+        const {editPostAuthor, editPostTitle, editPostBody} = this.state
+        editPost(postId, editPostAuthor, editPostTitle, editPostBody)
     }
 
-    handleEditCommentSubmit() {
+    copyPostToState(post) {
+        this.setState({editPostAuthor: post.author, editPostTitle: post.title, editPostBody: post.body})
+    }
+
+    addCommentAction() {
         const {addCommentForPost} = this.props
         const {post} = this.props
         const {editCommentAuthor, editCommentBody} = this.state
@@ -63,9 +72,22 @@ class PostComp extends React.Component {
                 <div className='post-header'>{post.title}</div>
                 <div className="flex-style">
                     <textarea className='content-text' defaultValue={post.body} disabled={true}/>
-                    <button className='btn-edit' onClick={() => {
-                        this.editPostAction(post)
-                    }}/>
+                    <DialogComp className='btn-edit' submitFunction={() => {
+                        this.editPostAction(post.id)
+                    }} submitText='update post' initFunction={() => {
+                        this.copyPostToState(post)
+                    }}>
+                        <div className='category-header'>Edit post {post.title}</div>
+                        <div className='meta-infos'>Author:</div>
+                        <input value={this.state.editPostAuthor}
+                               onChange={event => this.handleFieldChange('editPostAuthor', event)}/>
+                        <div className='meta-infos'>Title:</div>
+                        <input value={this.state.editPostTitle}
+                               onChange={event => this.handleFieldChange('editPostTitle', event)}/>
+                        <div className='meta-infos'>Content:</div>
+                        <textarea className='content-text' value={this.state.editPostBody}
+                                  onChange={event => this.handleFieldChange('editPostBody', event)}/>
+                    </DialogComp>
                     <button className='btn-delete' onClick={() => {
                         this.deletePostAction(post)
                     }}/>
@@ -87,15 +109,15 @@ class PostComp extends React.Component {
                 <div className='flex-style'>
                     <div className='post-header'>Comments</div>
                     <DialogComp className='btn-add' submitFunction={() => {
-                        this.handleEditCommentSubmit()
+                        this.addCommentAction()
                     }} submitText='add comment'>
                         <div className='category-header'>Add comment for post {post.title}</div>
                         <div className='meta-infos'>Author:</div>
                         <input value={this.state.editCommentAuthor}
-                               onChange={event => this.handleEditCommentChange('editCommentAuthor', event)}/>
+                               onChange={event => this.handleFieldChange('editCommentAuthor', event)}/>
                         <div className='meta-infos'>Content:</div>
                         <textarea className='content-text' value={this.state.editCommentBody}
-                                  onChange={event => this.handleEditCommentChange('editCommentBody', event)}/>
+                                  onChange={event => this.handleFieldChange('editCommentBody', event)}/>
                     </DialogComp>
                 </div>
                 {sortedComments.map((comment) => (
@@ -115,7 +137,8 @@ function mapDispatchToProps(dispatch) {
         voteForPost: (postId, option) => dispatch(voteForPost(postId, option)),
         reloadCommentsForPost: (postId) => dispatch(reloadCommentsForPost(postId)),
         addCommentForPost: (postId, author, body) => dispatch(addCommentForPost(postId, author, body)),
-        deletePost: (postId) => dispatch(deletePost(postId))
+        deletePost: (postId) => dispatch(deletePost(postId)),
+        editPost: (postId, author, title, body) => dispatch(editPost(postId, author, title, body))
     }
 }
 
