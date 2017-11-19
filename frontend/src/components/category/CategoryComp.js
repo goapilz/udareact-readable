@@ -80,7 +80,7 @@ class CategoryComp extends React.Component {
                         <div className='meta-infos'>Title:</div>
                         <input value={this.state.editPostTitle}
                                onChange={event => this.handleFieldChange('editPostTitle', event)}/>
-                        <div className='meta-infos'>Content:</div>
+                        <div className='meta-infos'>Message:</div>
                         <textarea className='content-text' value={this.state.editPostBody}
                                   onChange={event => this.handleFieldChange('editPostBody', event)}/>
                     </DialogComp>
@@ -115,7 +115,7 @@ class CategoryComp extends React.Component {
                                     <div className='meta-infos'>Title:</div>
                                     <input value={this.state.editPostTitle}
                                            onChange={event => this.handleFieldChange('editPostTitle', event)}/>
-                                    <div className='meta-infos'>Content:</div>
+                                    <div className='meta-infos'>Message:</div>
                                     <textarea className='content-text' value={this.state.editPostBody}
                                               onChange={event => this.handleFieldChange('editPostBody', event)}/>
                                 </DialogComp>
