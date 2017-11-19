@@ -93,10 +93,19 @@ export const addComment = (postId, author, body) =>
     })
 
 
-export const addPost = (categoryId, postId) => {
-    // categoryId needed ?
-    // if this method will return the new post the id can be generated
-}
+export const addPost = (categoryId, author, title, body) =>
+    fetch(`${APP_BACKEND}/posts/`, {
+        method: 'POST', headers, body: JSON.stringify({
+            category: categoryId,
+            author: author,
+            title: title,
+            body: body
+        })
+    }).then((res) => {
+        return res.json()
+    }).then((data) => {
+        return data
+    })
 
 export const updatePost = (postObject) => {
     // this method should return the updated post

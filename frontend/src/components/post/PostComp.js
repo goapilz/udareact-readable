@@ -47,7 +47,8 @@ class PostComp extends React.Component {
     handleEditCommentSubmit() {
         const {addCommentForPost} = this.props
         const {post} = this.props
-        addCommentForPost(post.id, this.state.editCommentAuthor, this.state.editCommentBody)
+        const {editCommentAuthor, editCommentBody} = this.state
+        addCommentForPost(post.id, editCommentAuthor, editCommentBody)
     }
 
     render() {
@@ -87,7 +88,7 @@ class PostComp extends React.Component {
                     <DialogComp className='btn-add' submitFunction={() => {
                         this.handleEditCommentSubmit()
                     }} submitText='commit comment'>
-                        new comment for post: {post.id}
+                        Add comment for post {post.title}
                         <div className='meta-infos'>Author:</div>
                         <input value={this.state.editCommentAuthor}
                                onChange={event => this.handleEditCommentChange('editCommentAuthor', event)}/>

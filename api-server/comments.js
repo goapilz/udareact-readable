@@ -1,6 +1,6 @@
 const clone = require('clone')
 const posts = require('./posts')
-const uuidv1 = require('uuid/v1');
+const uuidv1 = require('uuid/v1')
 
 let db = {}
 
@@ -21,7 +21,7 @@ const defaultData = {
         timestamp: 1469479767190,
         body: 'Comments. Are. Cool.',
         author: 'thingone',
-        voteScore: -5,
+        voteScore: 3,
         deleted: false,
         parentDeleted: false
     },
@@ -31,7 +31,7 @@ const defaultData = {
         timestamp: 1469479767190,
         body: 'First Comment',
         author: 'thingone',
-        voteScore: 3,
+        voteScore: 1,
         deleted: false,
         parentDeleted: false
     }

@@ -113,3 +113,11 @@ export const addCommentForPost = (postId, author, body) => dispatch => (
         }
     })
 )
+
+export const addPostForCategory = (categoryId, author, title, body) => dispatch => (
+    ReadableAPI.addPost(categoryId, author, title, body).then((data) => {
+        if (data) {
+            dispatch(updatePost({post: data}))
+        }
+    })
+)
