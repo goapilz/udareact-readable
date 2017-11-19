@@ -13,6 +13,7 @@ class App extends Component {
                 <Route exact path='/' component={MainView}/>
                 <Route path='/category/:categoryId' component={CategoryView}/>
                 <Route path='/post/:postId' component={PostView}/>
+                <Route path='/:categoryId/:postId' component={PostView}/>
             </div>
         )
     }
