@@ -17,11 +17,11 @@ class DialogComp extends React.Component {
         dialogOpen: false
     }
 
-    closeDialog() {
+    closeDialog = () => {
         this.setState({dialogOpen: false})
     }
 
-    openDialog() {
+    openDialog(){
         this.setState({dialogOpen: true})
     }
 
