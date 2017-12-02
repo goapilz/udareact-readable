@@ -8,26 +8,18 @@ class PostView extends React.Component {
 
     componentDidMount() {
         const {reloadPost} = this.props
-        const {postId} = this.props.match.params
+        const {post} = this.props
+
         // the categoryId is not really needed because it is part of the post
         // const {categoryId} = this.props.match.params
-
-        if (!this.getPost()) {
+        if (!post) {
+            const {postId} = this.props.match.params
             reloadPost(postId)
         }
     }
 
-    getPost() {
-        const {posts} = this.props
-        const {postId} = this.props.match.params
-        const post = posts.find(post => post.id === postId)
-        return post
-    }
-
     render() {
-        const {categories} = this.props
-
-        const post = this.getPost()
+        const {categories, post} = this.props
         const category = post && categories.find(value => value.path === post.category)
 
         return (
@@ -41,11 +33,13 @@ class PostView extends React.Component {
     }
 }
 
-function mapStateToProps({categories, posts}) {
-    // called before componentDidMount is called - no access to match props
+function mapStateToProps({categories, posts}, ownProps) {
+    const {postId} = ownProps.match.params
+    // only extract post of id
+    const post = posts.find(post => post.id === postId)
     return {
         categories,
-        posts // only extract post of id ? (not possible here because i cannot access the postId from props.match)
+        post
     }
 }
 
